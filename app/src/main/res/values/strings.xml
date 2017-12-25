@@ -4,4 +4,14 @@
     <string name="name_hint">Introduzca su nombre</string>
     <string name="user_surname">Apellidos: </string>
     <string name="surname_hint">Introduzca sus apellidos</string>
+    <string name="userType">Tipo de usuario</string>
+    <string name="alumn">Alumno</string>
+    <string name="teacher">Docente</string>
+    <string name="userData">Datos de usuario</string>
+    <string name="writeYourName">Escribe tu nombre</string>
+    <string name="writeYourSurname">Escribe tus apellidos</string>
+    <string name="enterPassword">Introduce una contraseña</string>
+    <string name="register">Registrarse</string>
+    <string name="goToLogin">Ir a iniciar sesión</string>
+    <string name="registerLabel">Registro</string>
 </resources>
