@@ -3,8 +3,8 @@ package eus.ehu.tta.graphiapp;
 public class BusinessMock implements Business {
 
     @Override
-    public boolean register(String name, String surname, String password, int userType) {
-        return true;
+    public String register(String name, String surname, String password, int userType) {
+        return "eb00";
     }
 
     @Override
