@@ -14,15 +14,18 @@
         android:text="@string/userType" />
 
     <RadioGroup
+        android:id="@+id/loginRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/alumnRadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/alumn" />
 
         <RadioButton
+            android:id="@+id/teacherRadioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/teacher" />
@@ -35,6 +38,7 @@
         android:text="@string/userData" />
 
     <EditText
+        android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -42,6 +46,7 @@
         android:hint="@string/writeYourName" />
 
     <EditText
+        android:id="@+id/surnameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -49,6 +54,7 @@
         android:hint="@string/writeYourSurname" />
 
     <EditText
+        android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -58,7 +64,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register" />
+        android:text="@string/register"
+        android:onClick="register"/>
 
     <Button
         android:layout_width="match_parent"
