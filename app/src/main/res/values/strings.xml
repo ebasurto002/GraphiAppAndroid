@@ -4,4 +4,6 @@
     <string name="name_hint">Introduzca su nombre</string>
     <string name="user_surname">Apellidos: </string>
     <string name="surname_hint">Introduzca sus apellidos</string>
+    <string name="play">Jugar</string>
+    <string name="help">Ayuda</string>
 </resources>
