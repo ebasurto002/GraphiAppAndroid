@@ -6,4 +6,5 @@
     <string name="surname_hint">Introduzca sus apellidos</string>
     <string name="play">Jugar</string>
     <string name="help">Ayuda</string>
+    <string name="back">Atrás</string>
 </resources>
