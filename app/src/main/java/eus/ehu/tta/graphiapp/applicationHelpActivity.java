@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,5 +21,10 @@ public class applicationHelpActivity extends drawerBaseActivity {
         VideoView videoView = (VideoView)findViewById(R.id.helpVideoView);
         videoView.setVideoURI(Uri.parse("https://dl.dropboxusercontent.com/s/e94hhon3f6dr6tb/Vídeo%20de%20ayuda%20de%20GraphiApp.mp4?dl=0"));
         videoView.start();
+    }
+
+    public void goBack(View view) {
+        Intent intent = new Intent(this,userHomeActivity.class);
+        startActivity(intent);
     }
 }
