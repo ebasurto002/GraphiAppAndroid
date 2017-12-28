@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,5 +16,10 @@ public class userHomeActivity extends drawerBaseActivity {
         LayoutInflater inflater = LayoutInflater.from(userHomeActivity.this);
         View inflatedView = inflater.inflate(R.layout.activity_user_home,viewGroup,false);
         viewGroup.addView(inflatedView);
+    }
+
+    public void goToHelp(View view) {
+        Intent intent = new Intent(this,applicationHelpActivity.class);
+        startActivity(intent);
     }
 }
