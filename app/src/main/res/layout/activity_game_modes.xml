@@ -4,18 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation = "vertical"
-    tools:context="eus.ehu.tta.graphiapp.userHomeActivity">
+    android:orientation="vertical"
+    tools:context="eus.ehu.tta.graphiapp.GameModesActivity">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="goToGameModes"
-        android:text="@string/play" />
+        android:text="@string/individual" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/virtualClass" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="goToHelp"
-        android:text="@string/help" />
+        android:onClick="goBack"
+        android:text="@string/back" />
 </LinearLayout>

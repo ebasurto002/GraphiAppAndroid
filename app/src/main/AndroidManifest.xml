@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eus.ehu.tta.graphiapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,10 +19,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".userHomeActivity" />
-        <activity android:name=".applicationHelpActivity"></activity>
-        <activity android:name=".drawerStudentActivity"></activity>
-        <activity android:name=".drawerTeacherActivity"></activity>
+        <activity android:name=".applicationHelpActivity" />
+        <activity android:name=".drawerStudentActivity" />
+        <activity android:name=".drawerTeacherActivity" />
+        <activity android:name=".GameModesActivity"></activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

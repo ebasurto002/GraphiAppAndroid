@@ -20,4 +20,9 @@ public class userHomeActivity extends drawerStudentActivity {
         Intent intent = new Intent(this,applicationHelpActivity.class);
         startActivity(intent);
     }
+
+    public void goToGameModes(View view) {
+        Intent intent = new Intent(this,GameModesActivity.class);
+        startActivity(intent);
+    }
 }
