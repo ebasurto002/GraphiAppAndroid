@@ -12,6 +12,12 @@
     <string name="individual">Individual</string>
     <string name="virtualClass">Clase virtual</string>
     <string name="begin">Comenzar</string>
+    <string name="level1">Nivel 1</string>
+    <string name="level2">Nivel 2</string>
+    <string name="level3">Nivel 3</string>
+    <string name="level4">Nivel 4</string>
+    <string name="level5">Nivel 5</string>
+    <string name="level8">Nivel 8</string>
     <string-array name="drawer_items">
         <item>@string/profile</item>
         <item>@string/closeSession</item>

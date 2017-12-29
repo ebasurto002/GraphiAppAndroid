@@ -24,6 +24,7 @@
         <activity android:name=".drawerTeacherActivity" />
         <activity android:name=".GameModesActivity" />
         <activity android:name=".IndividualModeActivity" />
+        <activity android:name=".LevelsActivity" />
     </application>
 
 </manifest>
