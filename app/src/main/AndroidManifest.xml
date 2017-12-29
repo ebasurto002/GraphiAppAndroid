@@ -18,8 +18,8 @@
         </activity>
         <activity android:name=".userHomeActivity" />
         <activity android:name=".applicationHelpActivity"></activity>
-        <activity android:name=".drawerBaseActivity">
-        </activity>
+        <activity android:name=".drawerStudentActivity"></activity>
+        <activity android:name=".drawerTeacherActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

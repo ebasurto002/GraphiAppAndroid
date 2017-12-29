@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class userHomeActivity extends drawerBaseActivity {
+public class userHomeActivity extends drawerStudentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

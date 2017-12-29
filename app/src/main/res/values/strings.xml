@@ -7,8 +7,10 @@
     <string name="play">Jugar</string>
     <string name="help">Ayuda</string>
     <string name="back">Atrás</string>
+    <string name="profile">Perfil</string>
+    <string name="closeSession">Cerrar sesión</string>
     <string-array name="drawer_items">
-        <item>Perfil</item>
-        <item>Cerrar sesión</item>
+        <item>@string/profile</item>
+        <item>@string/closeSession</item>
     </string-array>
 </resources>

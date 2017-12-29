@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.VideoView;
 
-public class applicationHelpActivity extends drawerBaseActivity {
+public class applicationHelpActivity extends drawerStudentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
