@@ -22,7 +22,8 @@
         <activity android:name=".applicationHelpActivity" />
         <activity android:name=".drawerStudentActivity" />
         <activity android:name=".drawerTeacherActivity" />
-        <activity android:name=".GameModesActivity"></activity>
+        <activity android:name=".GameModesActivity" />
+        <activity android:name=".IndividualModeActivity" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@
     <string name="closeSession">Cerrar sesión</string>
     <string name="individual">Individual</string>
     <string name="virtualClass">Clase virtual</string>
+    <string name="begin">Comenzar</string>
     <string-array name="drawer_items">
         <item>@string/profile</item>
         <item>@string/closeSession</item>

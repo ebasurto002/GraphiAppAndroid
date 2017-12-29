@@ -7,23 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class GameModesActivity extends drawerStudentActivity {
+public class IndividualModeActivity extends drawerStudentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout frameLayout = findViewById(R.id.content_frame);
-        LayoutInflater inflater = LayoutInflater.from(GameModesActivity.this);
-        inflater.inflate(R.layout.activity_game_modes,frameLayout,true);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        inflater.inflate(R.layout.activity_individual_mode,frameLayout,true);
     }
 
     public void goBack(View view) {
-        Intent intent = new Intent(this,userHomeActivity.class);
-        startActivity(intent);
-    }
-
-    public void goToIndividualMode(View view) {
-        Intent intent = new Intent(this,IndividualModeActivity.class);
+        Intent intent = new Intent(this,GameModesActivity.class);
         startActivity(intent);
     }
 }

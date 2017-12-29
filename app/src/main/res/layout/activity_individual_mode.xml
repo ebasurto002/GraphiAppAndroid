@@ -5,23 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="eus.ehu.tta.graphiapp.GameModesActivity">
+    tools:context="eus.ehu.tta.graphiapp.IndividualModeActivity">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/individual"
-        android:onClick="goToIndividualMode"/>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/virtualClass" />
+        android:text="@string/begin" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="goBack"
-        android:text="@string/back" />
+        android:text="@string/profile" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:onClick="goBack" />
 </LinearLayout>
