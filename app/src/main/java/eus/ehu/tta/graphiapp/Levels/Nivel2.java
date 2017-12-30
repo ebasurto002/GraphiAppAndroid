@@ -1,9 +1,9 @@
 package eus.ehu.tta.graphiapp.Levels;
 
 public class Nivel2 {
-    String palabra;
-    int tildada;
-    String audio;
+    private String palabra;
+    private int tildada;
+    private String audio;
 
     public Nivel2(String palabra, int tildada, String audio) {
         this.palabra = palabra;
