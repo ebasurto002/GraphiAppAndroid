@@ -4,6 +4,7 @@ import eus.ehu.tta.graphiapp.Levels.Nivel1;
 import eus.ehu.tta.graphiapp.Levels.Nivel2;
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
 import eus.ehu.tta.graphiapp.Levels.Nivel4;
+import eus.ehu.tta.graphiapp.Levels.Nivel5;
 
 public class BusinessMock implements Business {
 
@@ -89,6 +90,22 @@ public class BusinessMock implements Business {
             new Nivel4("Rova un coche para aparcarlo mejor", 1),
             new Nivel4("Los presos de las cárceles españolas critican la hentrada en masa de “gente normal”", 9),
             new Nivel4("Dios admite en el Sielo al primer pecador", 5)
+        };
+    }
+
+    @Override
+    public Nivel5[] getNivel5(Integer pin) {
+        return new Nivel5[] {
+            new Nivel5("Ellos van de paseo en su *** nuevo", "Se espera que el grupo *** hoy a su delegado", "bote", "vote"),
+            new Nivel5("Roberto *** y aceptó el consejo", "El niño se *** y esta llorando", "calló", "cayó"),
+            new Nivel5("La bandera ondea en su ***", "carmen lleva a María *** el colegio", "asta", "hasta"),
+            new Nivel5("En la pared colocaron un *** nuevo", "José *** que perdonar a su hermano", "tubo", "tuvo"),
+            new Nivel5("Una *** gigante se acercó a la playa", "EL niño saludo con un ``***´´ a su amiga.", "ola", "hola"),
+            new Nivel5("En las comidas el niño *** agua", "el *** llora cada vez que quiere comer", "bebe", "bebé"),
+            new Nivel5("La partida de cartas se gana con el *** de oros", "*** de terminar los deberes para ir al parque", "as", "Has"),
+            new Nivel5("mi hermana heredó todos los *** de mi tio", "¿Mañana *** a la comida familiar?", "Bienes", "Vienes"),
+            new Nivel5("Estoy *** con mi mejor amiga", "Yo *** la plastilina antes de realizar figuras", "hablando", "ablando"),
+            new Nivel5("Este curriculum no es *** para este puesto de trabajo", "Se ha escuchado un *** en la granja", "valido", "balido")
         };
     }
 }

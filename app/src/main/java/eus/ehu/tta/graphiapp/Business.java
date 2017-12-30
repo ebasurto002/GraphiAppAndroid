@@ -4,6 +4,7 @@ import eus.ehu.tta.graphiapp.Levels.Nivel1;
 import eus.ehu.tta.graphiapp.Levels.Nivel2;
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
 import eus.ehu.tta.graphiapp.Levels.Nivel4;
+import eus.ehu.tta.graphiapp.Levels.Nivel5;
 
 public interface Business {
 
@@ -17,5 +18,5 @@ public interface Business {
     public abstract Nivel2[] getNivel2(Integer pin);
     public abstract Nivel3[] getNivel3(Integer pin);
     public abstract Nivel4[] getNivel4(Integer pin);
-
+    public abstract Nivel5[] getNivel5(Integer pin);
 }

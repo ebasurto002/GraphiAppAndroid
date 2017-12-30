@@ -39,4 +39,9 @@ public class LevelsActivity extends drawerStudentActivity {
         Intent intent = new Intent(this,Level4Activity.class);
         startActivity(intent);
     }
+
+    public void goToLevel5(View view) {
+        Intent intent = new Intent(this,Level5Activity.class);
+        startActivity(intent);
+    }
 }

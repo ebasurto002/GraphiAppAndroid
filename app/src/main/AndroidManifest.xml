@@ -29,6 +29,7 @@
         <activity android:name=".Level2Activity" />
         <activity android:name=".Level3Activity" />
         <activity android:name=".Level4Activity" />
+        <activity android:name=".Level5Activity" />
     </application>
 
 </manifest>
