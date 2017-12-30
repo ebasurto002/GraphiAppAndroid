@@ -3,6 +3,7 @@ package eus.ehu.tta.graphiapp;
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
 import eus.ehu.tta.graphiapp.Levels.Nivel2;
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
+import eus.ehu.tta.graphiapp.Levels.Nivel4;
 
 public class BusinessMock implements Business {
 
@@ -72,6 +73,22 @@ public class BusinessMock implements Business {
             new Nivel3( "Vaca", "Baca", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Baca.jpg"),
             new Nivel3( "Hola", "Ola", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Ola.jpg"),
             new Nivel3( "Bobina", "Bovina", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Bobina.jpg")
+        };
+    }
+
+    @Override
+    public Nivel4[] getNivel4(Integer pin) {
+        return new Nivel4[] {
+            new Nivel4("Descubre que es canival tras morderse la lengua y querer repetir", 4),
+            new Nivel4("Denuncian situaziones laborables que perjudican a adolescentes", 2),
+            new Nivel4("La ambruna crece en todo el mundo", 2),
+            new Nivel4("La venta de las bibiendas ha aumentado un 50%", 5),
+            new Nivel4("El Rei hace público un sueldo de 292.000€ brutos al año", 2),
+            new Nivel4("Un abión español se estrella en Turquia por tercera vez lo que va en de año", 2),
+            new Nivel4("Condenan a ocho de los tres akusados por secuestrar a un menor", 7),
+            new Nivel4("Rova un coche para aparcarlo mejor", 1),
+            new Nivel4("Los presos de las cárceles españolas critican la hentrada en masa de “gente normal”", 9),
+            new Nivel4("Dios admite en el Sielo al primer pecador", 5)
         };
     }
 }
