@@ -12,5 +12,5 @@ public interface Business {
     public abstract boolean login (String userName, String password, int userType);
 
     public abstract Nivel1[] getNivel1(Integer pin); //pin = null en modo individual
-    public Nivel2[] getNivel2(Integer pin);
+    public abstract Nivel2[] getNivel2(Integer pin);
 }
