@@ -26,6 +26,7 @@
         <activity android:name=".IndividualModeActivity" />
         <activity android:name=".LevelsActivity" />
         <activity android:name=".Level1Activity" />
+        <activity android:name=".Level2Activity" />
     </application>
 
 </manifest>
