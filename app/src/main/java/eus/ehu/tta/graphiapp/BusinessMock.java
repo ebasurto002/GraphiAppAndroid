@@ -1,5 +1,7 @@
 package eus.ehu.tta.graphiapp;
 
+import eus.ehu.tta.graphiapp.Levels.Nivel1;
+
 public class BusinessMock implements Business {
 
     @Override
@@ -22,5 +24,21 @@ public class BusinessMock implements Business {
         {
             return false;
         }
+    }
+
+    @Override
+    public Nivel1[] getNivel1(Integer pin) {
+        return new Nivel1 [] {
+            new Nivel1("correcta","incorrecta",1),
+            new Nivel1("incorrecta","correcta",2),
+            new Nivel1("correcta","incorrecta",1),
+            new Nivel1("incorrecta","correcta",2),
+            new Nivel1("correcta","incorrecta",1),
+            new Nivel1("incorrecta","correcta",2),
+            new Nivel1("correcta","incorrecta",1),
+            new Nivel1("incorrecta","correcta",2),
+            new Nivel1("correcta","incorrecta",1),
+            new Nivel1("incorrecta","correcta",2)
+        };
     }
 }
