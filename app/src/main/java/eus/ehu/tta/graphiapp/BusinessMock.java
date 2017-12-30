@@ -2,6 +2,7 @@ package eus.ehu.tta.graphiapp;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
 import eus.ehu.tta.graphiapp.Levels.Nivel2;
+import eus.ehu.tta.graphiapp.Levels.Nivel3;
 
 public class BusinessMock implements Business {
 
@@ -55,6 +56,22 @@ public class BusinessMock implements Business {
                 new Nivel2("bisturi",7,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/bisturi.mp3"),
                 new Nivel2("nitido",2,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/nitido.mp3"),
                 new Nivel2("capitan",6,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/capitan.mp3")
+        };
+    }
+
+    @Override
+    public Nivel3[] getNivel3(Integer pin) {
+        return new Nivel3[] {
+            new Nivel3( "Abrasar", "Abrazar", 2,"http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Abrazar.jpg"),
+            new Nivel3( "Hasta", "Asta", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Asta.jpg"),
+            new Nivel3( "Barón", "Varón", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Baron.jpg"),
+            new Nivel3( "Cabo", "Cavó", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Cabo.jpg"),
+            new Nivel3( "Sumo", "Zumo", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Sumo.jpg"),
+            new Nivel3( "Sabia", "Sabía", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Sabia.jpg"),
+            new Nivel3( "Arrollo", "Arroyo", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Arroyo.jpg"),
+            new Nivel3( "Vaca", "Baca", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Baca.jpg"),
+            new Nivel3( "Hola", "Ola", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Ola.jpg"),
+            new Nivel3( "Bobina", "Bovina", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Bobina.jpg")
         };
     }
 }

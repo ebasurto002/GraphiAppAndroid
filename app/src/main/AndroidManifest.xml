@@ -27,6 +27,7 @@
         <activity android:name=".LevelsActivity" />
         <activity android:name=".Level1Activity" />
         <activity android:name=".Level2Activity" />
+        <activity android:name=".Level3Activity" />
     </application>
 
 </manifest>
