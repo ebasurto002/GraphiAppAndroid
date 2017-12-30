@@ -78,5 +78,6 @@ public class Level1Activity extends drawerStudentActivity {
     private void endLevel() {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
+        goBack(null);
     }
 }
