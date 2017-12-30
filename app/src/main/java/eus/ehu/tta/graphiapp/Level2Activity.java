@@ -1,6 +1,8 @@
 package eus.ehu.tta.graphiapp;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,11 +52,23 @@ public class Level2Activity extends drawerStudentActivity {
             ));
             linearLayout.addView(button);
         }
+
     }
 
     public void goBack(View view) {
         Intent intent = new Intent(this,LevelsActivity.class);
         startActivity(intent);
+    }
+
+    public void playAudio(View view) {
+        MediaPlayer audioPlayer = MediaPlayer.create(this, Uri.parse(levelArray[index].getAudio()));
+        audioPlayer.start();
+        audioPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.release();
+            }
+        });
     }
 
     private class buttonOnClickListener implements View.OnClickListener {

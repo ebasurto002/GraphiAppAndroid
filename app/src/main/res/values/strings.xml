@@ -18,6 +18,7 @@
     <string name="level4">Nivel 4</string>
     <string name="level5">Nivel 5</string>
     <string name="level8">Nivel 8</string>
+    <string name="hearWord">Escuchar palabra</string>
     <string-array name="drawer_items">
         <item>@string/profile</item>
         <item>@string/closeSession</item>
