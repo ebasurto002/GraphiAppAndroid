@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
         {
             tipoUsuario = Business.TIPO_ALUMNO;
         }
-        if (idRadioButtonChecked == R.id.alumnRadioButton)
+        else if (idRadioButtonChecked == R.id.teacherRadioButton)
         {
-            tipoUsuario = Business.TIPO_ALUMNO;
+            tipoUsuario = Business.TIPO_PROFESOR;
         }
         else
         {
