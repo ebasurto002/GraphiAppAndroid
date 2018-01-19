@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">GraphiApp</string>
     <string name="user_name">Nombre: </string>
-    <string name="name_hint">Introduzca su nombre</string>
     <string name="user_surname">Apellidos: </string>
     <string name="surname_hint">Introduzca sus apellidos</string>
     <string name="play">Jugar</string>
@@ -24,4 +23,19 @@
         <item>@string/profile</item>
         <item>@string/closeSession</item>
     </string-array>
+    <string name="userType">Tipo de usuario</string>
+    <string name="alumn">Alumno</string>
+    <string name="teacher">Docente</string>
+    <string name="userData">Datos de usuario</string>
+    <string name="writeYourName">Escribe tu nombre</string>
+    <string name="writeYourSurname">Escribe tus apellidos</string>
+    <string name="enterPassword">Introduce una contraseña</string>
+    <string name="register">Registrarse</string>
+    <string name="goToLogin">Ir a iniciar sesión</string>
+    <string name="registerLabel">Registro</string>
+    <string name="errorLoginRadioButtons">Escoge el tipo de usuario</string>
+    <string name="registerError">No se ha podido realizar el registro correctamente</string>
+    <string name="registerCompleted">Se ha completado el registro. Tu nickname es</string>
+    <string name="loginNameHint">Escribe tu nickname</string>
+    <string name="signIn">Inciar sesión</string>
 </resources>

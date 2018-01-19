@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="eus.ehu.tta.graphiapp.MainActivity">
+    tools:context="eus.ehu.tta.graphiapp.LoginActivity"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/userType" />
 
     <RadioGroup
-        android:id="@+id/loginRadioGroup"
+        android:id="@+id/loginInitRadioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/alumnRadioButton"
+            android:id="@+id/alumnRadioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/alumn" />
 
         <RadioButton
-            android:id="@+id/teacherRadioButton"
+            android:id="@+id/teacherRadioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/teacher" />
@@ -38,38 +38,25 @@
         android:text="@string/userData" />
 
     <EditText
-        android:id="@+id/nameEditText"
+        android:id="@+id/loginName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="@string/writeYourName" />
+        android:hint="@string/loginNameHint" />
 
     <EditText
-        android:id="@+id/surnameEditText"
+        android:id="@+id/psswd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/writeYourSurname" />
-
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:hint="@string/enterPassword" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:onClick="register"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/goToLogin" />
+        android:text="@string/signIn"
+        android:onClick="login"/>
 
 </LinearLayout>

@@ -9,8 +9,8 @@ import eus.ehu.tta.graphiapp.Levels.Nivel5;
 public class BusinessMock implements Business {
 
     @Override
-    public boolean register(String name, String surname, String password, int userType) {
-        return true;
+    public String register(String name, String surname, String password, int userType) {
+        return "eb00";
     }
 
     @Override
