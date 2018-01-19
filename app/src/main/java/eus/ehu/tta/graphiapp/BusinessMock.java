@@ -31,7 +31,7 @@ public class BusinessMock implements Business {
     }
 
     @Override
-    public Nivel1[] getNivel1(Integer pin) {
+    public Nivel1[] getNivel1(String nickname, Integer pin) {
         return new Nivel1 [] {
             new Nivel1("correcta","incorrecta",1),
             new Nivel1("incorrecta","correcta",2),
@@ -46,7 +46,7 @@ public class BusinessMock implements Business {
         };
     }
 
-    public Nivel2[] getNivel2(Integer pin) {
+    public Nivel2[] getNivel2(String nickname, Integer pin) {
         return new Nivel2[] {
                 new Nivel2("Telefono",4,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/telefono.mp3"),
                 new Nivel2("camaleon",7,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/camaleon.mp3"),
@@ -62,7 +62,7 @@ public class BusinessMock implements Business {
     }
 
     @Override
-    public Nivel3[] getNivel3(Integer pin) {
+    public Nivel3[] getNivel3(String nickname, Integer pin) {
         return new Nivel3[] {
             new Nivel3( "Abrasar", "Abrazar", 2,"http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Abrazar.jpg"),
             new Nivel3( "Hasta", "Asta", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Asta.jpg"),
@@ -78,7 +78,7 @@ public class BusinessMock implements Business {
     }
 
     @Override
-    public Nivel4[] getNivel4(Integer pin) {
+    public Nivel4[] getNivel4(String nickname, Integer pin) {
         return new Nivel4[] {
             new Nivel4("Descubre que es canival tras morderse la lengua y querer repetir", 4),
             new Nivel4("Denuncian situaziones laborables que perjudican a adolescentes", 2),
@@ -94,7 +94,7 @@ public class BusinessMock implements Business {
     }
 
     @Override
-    public Nivel5[] getNivel5(Integer pin) {
+    public Nivel5[] getNivel5(String nickname, Integer pin) {
         return new Nivel5[] {
             new Nivel5("Ellos van de paseo en su *** nuevo", "Se espera que el grupo *** hoy a su delegado", "bote", "vote"),
             new Nivel5("Roberto *** y aceptó el consejo", "El niño se *** y esta llorando", "calló", "cayó"),
