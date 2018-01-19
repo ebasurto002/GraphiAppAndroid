@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class LoginActivity extends coreActivity {
 
@@ -15,15 +16,15 @@ public class LoginActivity extends coreActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        this.business = new BusinessMock();
+        this.business = new RealBusiness();
     }
 
     public void login(View view){
 
-        String login = ((EditText)findViewById(R.id.loginName)).getText().toString();
-        String passwd = ((EditText)findViewById(R.id.psswd)).getText().toString();
-        int uType;
-        RadioGroup rGroup = (RadioGroup)findViewById(R.id.loginInitRadioGroup);
+        final String login = ((EditText)findViewById(R.id.loginName)).getText().toString();
+        final String passwd = ((EditText)findViewById(R.id.psswd)).getText().toString();
+        final int uType;
+        final RadioGroup rGroup = (RadioGroup)findViewById(R.id.loginInitRadioGroup);
         int idChecked = rGroup.getCheckedRadioButtonId();
 
         if(idChecked == R.id.alumnRadioButton2){
@@ -35,11 +36,32 @@ public class LoginActivity extends coreActivity {
         else {
             uType = -1;
         }
+        new ProgressTask<Boolean>(this){
+            @Override
+            protected Boolean work(){
+                return business.login(login,passwd,uType);
+            }
+            @Override
+            protected void onFinish(Boolean result){
+                if(result.booleanValue() == true){
+                    if(uType==Business.TIPO_ALUMNO){
+                        Intent intent = new Intent(LoginActivity.this,TeacherHomeActivity.class);
+                        intent.putExtra(TeacherHomeActivity.EXTRA_LOGIN,login);
+                    }
+                    else{
+                        Intent intent = new Intent(LoginActivity.this,TeacherHomeActivity.class);
+                        intent.putExtra(TeacherHomeActivity.EXTRA_LOGIN, login);
+                        startActivity(intent);
+                    }
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, R.string.loginErrorToast,Toast.LENGTH_SHORT).show();
+                    EditText pswd = (EditText)findViewById(R.id.psswd);
+                    pswd.setText("");
+                }
+            }
+        }.execute();
 
-        if(business.login(login,passwd,uType)){
-            Intent intent = new Intent(this, TeacherHomeActivity.class);
-            intent.putExtra(TeacherHomeActivity.EXTRA_LOGIN, login);
-            startActivity(intent);
-        }
+
     }
 }
