@@ -7,9 +7,14 @@
     tools:context="eus.ehu.tta.graphiapp.TeacherHomeActivity"
     android:orientation="vertical">
 
+    <TextView android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Clases Guardadas"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lore ipsum..."/>
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
