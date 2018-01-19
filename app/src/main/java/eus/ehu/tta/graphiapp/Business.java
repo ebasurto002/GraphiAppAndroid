@@ -19,4 +19,5 @@ public interface Business {
     public abstract Nivel3[] getNivel3(Integer pin);
     public abstract Nivel4[] getNivel4(Integer pin);
     public abstract Nivel5[] getNivel5(Integer pin);
+    public abstract String registerClass(String tematica, int fecha, String login);
 }

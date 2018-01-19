@@ -108,4 +108,9 @@ public class BusinessMock implements Business {
             new Nivel5("Este curriculum no es *** para este puesto de trabajo", "Se ha escuchado un *** en la granja", "valido", "balido")
         };
     }
+
+    @Override
+    public String registerClass(String tematica, int fecha, String login) {
+        return null;
+    }
 }

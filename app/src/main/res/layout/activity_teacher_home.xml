@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="eus.ehu.tta.graphiapp.TeacherHomeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/tHLayout">
 
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +15,21 @@
         android:text="Clases Guardadas"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Nueva Clase"/>
+    <EditText
+        android:id="@+id/className"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/newClassHint"/>
+    <Button
+        android:id="@+id/startPostBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/postClassStartBtn"
+        android:onClick="startPosting"/>
 
 
 </LinearLayout>

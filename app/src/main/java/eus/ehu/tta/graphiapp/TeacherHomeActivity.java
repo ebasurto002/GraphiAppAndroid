@@ -1,13 +1,26 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TeacherHomeActivity extends drawerTeacherActivity {
 
     public static final String EXTRA_LOGIN = "login";
+    public static int CLASS_ID = 0;
+    protected Business business = new RealBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,5 +28,33 @@ public class TeacherHomeActivity extends drawerTeacherActivity {
         FrameLayout frameLayout = findViewById(R.id.content_frame);
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_teacher_home,frameLayout,true);
+    }
+
+    public void startPosting(View view){
+        EditText className = (EditText)findViewById(R.id.className);
+        final String name = className.getText().toString();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+        String dateString = df.format(calendar.getTime());
+        final int date = Integer.parseInt(dateString);
+        final String login = getIntent().getStringExtra(EXTRA_LOGIN);
+        new ProgressTask<String>(this){
+            @Override
+            protected String work(){
+                return business.registerClass(name,date,login);
+            }
+            @Override
+            protected void onFinish(String result){
+                if(result.contains("Error")){
+                    Toast.makeText(TeacherHomeActivity.this,R.string.registerClassError,Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    CLASS_ID = Integer.parseInt(result);
+                    Intent intent = new Intent(TeacherHomeActivity.this, PostLevel1Activity.class);
+                    startActivity(intent);
+                }
+            }
+        }.execute();
+
     }
 }

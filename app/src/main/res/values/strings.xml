@@ -49,4 +49,7 @@
     <string name="level4Label">Nivel 4</string>
     <string name="level5Label">Nivel 5</string>
     <string name="loginErrorToast">Error al inicio. Login, contraseña o tipo de usuario incorrecto</string>
+    <string name="newClassHint">Introduce el nombre de la clase</string>
+    <string name="postClassStartBtn">Empieza a postear</string>
+    <string name="registerClassError">No se ha podido registrar la clase</string>
 </resources>

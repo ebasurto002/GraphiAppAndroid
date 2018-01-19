@@ -65,6 +65,26 @@ public class RealBusiness implements Business {
         }
         return false;
     }
+    @Override
+    public String registerClass(String tematica, int fecha, String login){
+
+        try{
+            JSONObject json = new JSONObject();
+            json.put("tematica",tematica);
+            json.put("fecha",fecha);
+            json.put("loginDocente",login);
+            String response = restClient.postJsonwithString(json, "registerClass");
+
+            return response;
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch(JSONException je){
+            je.printStackTrace();
+        }
+        return "";
+    }
 
     @Override
     public Nivel1[] getNivel1(Integer pin) {
