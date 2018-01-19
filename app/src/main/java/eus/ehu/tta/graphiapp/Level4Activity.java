@@ -36,7 +36,6 @@ public class Level4Activity extends drawerStudentActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_level4, frameLayout, true);
 
-        business = new BusinessMock();
         levelArray = business.getNivel4(null);
         index = 0;
         correctas = 0;
