@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends coreActivity {
 
     private Business business;
 

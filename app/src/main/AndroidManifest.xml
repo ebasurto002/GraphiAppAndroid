@@ -33,7 +33,8 @@
         <activity android:name=".Level4Activity" />
         <activity android:name=".Level5Activity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".TeacherHomeActivity"></activity>
+        <activity android:name=".TeacherHomeActivity" />
+        <activity android:name=".coreActivity" />
     </application>
 
 </manifest>

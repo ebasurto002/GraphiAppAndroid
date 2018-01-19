@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends coreActivity {
 
     Business negocio;
 
@@ -74,4 +74,5 @@ public class MainActivity extends AppCompatActivity {
 
         return tipoUsuario;
     }
+
 }
