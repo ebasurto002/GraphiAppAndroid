@@ -114,5 +114,25 @@ public class RestClient {
             }
         }
     }
+    public String postJsonwithString(final JSONObject json, String path) throws IOException{
+        HttpURLConnection c = null;
+
+        try{
+            c = getConnection(path, "POST");
+            c.setRequestProperty("Content-Type","application/json; charset=UTF-8");
+            c.setDoOutput(true);
+            try(PrintWriter pw = new PrintWriter(c.getOutputStream())){
+                pw.print(json.toString());
+                pw.close();
+            }
+            try(BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()))){
+                return br.readLine();
+            }
+        }finally{
+            if(c != null){
+                c.disconnect();
+            }
+        }
+    }
 
 }

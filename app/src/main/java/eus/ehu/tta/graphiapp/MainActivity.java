@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,12 +16,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        negocio = new BusinessMock();
+        negocio = new RealBusiness();
+    }
+
+    public void goToLogin(View view){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     public void register(View view)
     {
-        int tipoUsuario = checkRadioButtons();
+        final int tipoUsuario = checkRadioButtons();
         if (tipoUsuario == -1)
         {
             Toast.makeText(this,R.string.errorLoginRadioButtons, Toast.LENGTH_SHORT).show();
@@ -28,29 +34,44 @@ public class MainActivity extends AppCompatActivity {
 
         else
         {
-            EditText nombreEditText = findViewById(R.id.nameEditText);
-            String nombre = nombreEditText.getText().toString();
+            final EditText nombreEditText = findViewById(R.id.nameEditText);
+            final String nombre = nombreEditText.getText().toString();
 
-            EditText apellidoEditText = findViewById(R.id.surnameEditText);
-            String apellidos = apellidoEditText.getText().toString();
+            final EditText apellidoEditText = findViewById(R.id.surnameEditText);
+            final String apellidos = apellidoEditText.getText().toString();
 
-            EditText passwordEditText = findViewById(R.id.passwordEditText);
-            String password = passwordEditText.getText().toString();
+            final EditText passwordEditText = findViewById(R.id.passwordEditText);
+            final String password = passwordEditText.getText().toString();
 
-            String nickname = negocio.register(nombre, apellidos, password, tipoUsuario);
+            new ProgressTask<String>(this){
+                @Override
+                protected String work(){
+                    String nickname = negocio.register(nombre, apellidos, password, tipoUsuario);
+                    return nickname;
+                }
 
-            if (!nickname.equals(""))
-            {
-                String showNickname = getResources().getString(R.string.registerCompleted);
-                showNickname = showNickname.concat(" " + nickname);
+                protected void onFinish(String result){
+                    if (!result.equals(""))
+                    {
+                        String showNickname = getResources().getString(R.string.registerCompleted);
+                        showNickname = showNickname.concat(" " + result);
 
-                Toast.makeText(this,showNickname, Toast.LENGTH_SHORT).show();
-            }
+                        Toast.makeText(MainActivity.this,showNickname, Toast.LENGTH_LONG).show();
+                        nombreEditText.setText("");
+                        apellidoEditText.setText("");
+                        passwordEditText.setText("");
+                        RadioGroup rg = (RadioGroup)findViewById(R.id.loginRadioGroup);
+                        rg.clearCheck();
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
 
-            else
-            {
-                Toast.makeText(this,R.string.registerError, Toast.LENGTH_LONG).show();
-            }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this,R.string.registerError, Toast.LENGTH_LONG).show();
+                    }
+                }
+            }.execute();
         }
     }
 
