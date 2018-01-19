@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 public class coreActivity extends AppCompatActivity {
 
-    private Business business;
+    protected Business business;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
