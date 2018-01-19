@@ -6,6 +6,11 @@ public class Nivel3 {
     private int correcta;
     private String urlImagen;
 
+    public Nivel3()
+    {
+
+    }
+
     public Nivel3(String palabra1, String palabra2, int correcta, String urlImagen) {
         this.palabra1 = palabra1;
         this.palabra2 = palabra2;

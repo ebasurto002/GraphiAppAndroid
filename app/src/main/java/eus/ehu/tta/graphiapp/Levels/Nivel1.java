@@ -5,6 +5,11 @@ public class Nivel1 {
     private String palabra2;
     private int correcta;
 
+    public Nivel1()
+    {
+
+    }
+
     public Nivel1(String palabra1, String palabra2, int correcta) {
         this.palabra1 = palabra1;
         this.palabra2 = palabra2;

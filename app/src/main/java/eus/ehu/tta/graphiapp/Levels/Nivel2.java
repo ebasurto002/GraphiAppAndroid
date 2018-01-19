@@ -5,6 +5,11 @@ public class Nivel2 {
     private int tildada;
     private String audio;
 
+    public Nivel2()
+    {
+
+    }
+
     public Nivel2(String palabra, int tildada, String audio) {
         this.palabra = palabra;
         this.tildada = tildada;

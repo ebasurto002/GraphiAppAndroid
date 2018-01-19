@@ -6,6 +6,11 @@ public class Nivel5 {
     private  String palabra1;
     private String palabra2;
 
+    public Nivel5()
+    {
+
+    }
+
     public Nivel5(String frase1, String frase2, String palabra1, String palabra2) {
         this.frase1 = frase1;
         this.frase2 = frase2;

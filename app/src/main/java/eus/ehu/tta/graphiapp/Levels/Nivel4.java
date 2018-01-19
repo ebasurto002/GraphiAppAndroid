@@ -4,6 +4,11 @@ public class Nivel4 {
     private String titular;
     private int incorrecta;
 
+    public Nivel4()
+    {
+
+    }
+
     public Nivel4(String titular, int incorrecta) {
         this.titular = titular;
         this.incorrecta = incorrecta;
