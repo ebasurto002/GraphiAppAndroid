@@ -30,7 +30,7 @@ public class RealBusiness implements Business {
                 login  = restClient.postJsonwithString(json, "registerUser");
             }
             else {
-                login = restClient.postJsonwithString(json,"regiterTeacher");
+                login = restClient.postJsonwithString(json,"registerTeacher");
             }
             return login;
 
