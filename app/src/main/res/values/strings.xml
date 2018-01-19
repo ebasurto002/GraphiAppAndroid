@@ -38,4 +38,5 @@
     <string name="registerCompleted">Se ha completado el registro. Tu nickname es</string>
     <string name="loginNameHint">Escribe tu nickname</string>
     <string name="signIn">Inciar sesión</string>
+    <string name="loginErrorToast">Error al inicio. Login, contraseña o tipo de usuario incorrecto</string>
 </resources>

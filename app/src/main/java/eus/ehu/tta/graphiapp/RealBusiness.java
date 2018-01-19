@@ -46,19 +46,24 @@ public class RealBusiness implements Business {
 
     @Override
     public boolean login(String userName, String password, int userType) {
-        if (userName.equals("eb00") && password.equals("1234") && userType == TIPO_ALUMNO)
-        {
-            return true;
+        try {
+            String response = restClient.getString("loginUser?nickname="+userName+"&password="+password);
+            if(response.contains("Error")){
+                return false;
+            }
+            else if(response.contains("Alumno")&&userType== TIPO_ALUMNO){
+                return true;
+            }
+            else if(response.contains("Docente")&&userType==TIPO_PROFESOR){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        else if (userName.equals("je00") && password.equals("1234") && userType == TIPO_PROFESOR)
-        {
-            return true;
-        }
-
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     @Override
