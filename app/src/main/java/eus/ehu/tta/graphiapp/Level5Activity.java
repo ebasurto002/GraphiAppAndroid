@@ -58,6 +58,9 @@ public class Level5Activity extends drawerStudentActivity {
         textViewSentence2Part1.setText(sentence2split[0]);
         TextView textViewSentence2Part2 = findViewById(R.id.level5Sentence2Part2);
         textViewSentence2Part2.setText(sentence2split[1]);
+
+        ((EditText) findViewById(R.id.level5EditText1)).setText("");
+        ((EditText) findViewById(R.id.level5EditText2)).setText("");
     }
 
     private String[] splitSentence(String sentence) {
