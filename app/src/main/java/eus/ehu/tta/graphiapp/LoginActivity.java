@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 public class LoginActivity extends coreActivity {
 
-    private Business business;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

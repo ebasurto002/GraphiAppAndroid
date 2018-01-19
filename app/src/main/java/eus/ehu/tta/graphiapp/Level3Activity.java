@@ -19,7 +19,6 @@ public class Level3Activity extends drawerStudentActivity {
     private int index;
     private int correctas;
     private Nivel3[] levelArray;
-    private Business business;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
