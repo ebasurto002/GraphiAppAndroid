@@ -96,18 +96,30 @@ public class RealBusiness implements Business {
     }
 
     public Nivel2[] getNivel2(String nickname, Integer pin) {
-        return new Nivel2[] {
-                new Nivel2("Telefono",4,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/telefono.mp3"),
-                new Nivel2("camaleon",7,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/camaleon.mp3"),
-                new Nivel2("cancer",2,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/cancer.mp3"),
-                new Nivel2("pais",3,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/pais.mp3"),
-                new Nivel2("matematicas",6,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/matematicas.mp3"),
-                new Nivel2("adios",4,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/adios.mp3"),
-                new Nivel2("trebol",3,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/trebol.mp3"),
-                new Nivel2("bisturi",7,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/bisturi.mp3"),
-                new Nivel2("nitido",2,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/nitido.mp3"),
-                new Nivel2("capitan",6,"http://u017633.ehu.eus:28080/GraphiAppServer/audio/capitan.mp3")
-        };
+        String path;
+        Nivel2[] nivel2Array = null;
+        path = String.format("getNivel2?nickname=%s",nickname);
+        if (pin!=null)
+        {
+            path.concat(String.format("&&pin=%d",pin.intValue()));
+        }
+        try {
+            JSONObject jsonObject = restClient.getJson(path);
+            JSONArray jsonArray = jsonObject.getJSONArray("nivel2");
+            nivel2Array = new Nivel2[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject nivel1JSON = jsonArray.getJSONObject(i);
+                Nivel2 nivel2 = new Nivel2();
+                nivel2.setAudio(nivel1JSON.getString("audio"));
+                nivel2.setPalabra(nivel1JSON.getString("palabra"));
+                nivel2.setTildada(nivel1JSON.getInt("tildada"));
+                nivel2Array[i] = nivel2;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return nivel2Array;
     }
 
     @Override

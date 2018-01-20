@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -19,6 +20,8 @@ public class Level2Activity extends drawerStudentActivity {
     private int index;
     private int correctas;
     private Nivel2[] levelArray;
+    private String nickname;
+    private Integer pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +31,12 @@ public class Level2Activity extends drawerStudentActivity {
         inflater.inflate(R.layout.activity_level2,frameLayout,true);
 
         StudentData studentData = StudentData.getInstance();
-        levelArray = business.getNivel2(studentData.getNickname(),null);
+        nickname = studentData.getNickname();
+        pin = null;
         index=0;
         correctas=0;
 
-        setButtons();
+        new getLevelTask(this).execute();
     }
 
     private void setButtons() {
@@ -99,5 +103,32 @@ public class Level2Activity extends drawerStudentActivity {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
         goBack(null);
+    }
+
+    private class getLevelTask extends ProgressTask<Nivel2[]>
+    {
+
+        public getLevelTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Nivel2[] work() throws Exception {
+            return business.getNivel2(nickname,pin);
+        }
+
+        @Override
+        protected void onFinish(Nivel2[] result) {
+            levelArray = result;
+            if (levelArray != null) {
+                setButtons();
+                Button button = findViewById(R.id.level2HearAudio);
+                button.setEnabled(true);
+            }
+            else
+            {
+                Toast.makeText(Level2Activity.this, "No se ha podido obtener los ejercicios del servidor",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
