@@ -69,15 +69,9 @@ public class RealBusiness implements Business {
 
     @Override
     public Nivel1[] getNivel1(String nickname, Integer pin) {
-        String path;
         Nivel1[] nivel1Array = null;
-        path = String.format("getNivel1?nickname=%s",nickname);
-        if (pin!=null)
-        {
-            path.concat(String.format("&&pin=%d",pin.intValue()));
-        }
         try {
-            JSONObject jsonObject = restClient.getJson(path);
+            JSONObject jsonObject = getNivelJSON("getNivel1",nickname,pin);
             JSONArray jsonArray = jsonObject.getJSONArray("nivel1");
             nivel1Array = new Nivel1[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -96,15 +90,9 @@ public class RealBusiness implements Business {
     }
 
     public Nivel2[] getNivel2(String nickname, Integer pin) {
-        String path;
         Nivel2[] nivel2Array = null;
-        path = String.format("getNivel2?nickname=%s",nickname);
-        if (pin!=null)
-        {
-            path.concat(String.format("&&pin=%d",pin.intValue()));
-        }
         try {
-            JSONObject jsonObject = restClient.getJson(path);
+            JSONObject jsonObject = getNivelJSON("getNivel2",nickname,pin);
             JSONArray jsonArray = jsonObject.getJSONArray("nivel2");
             nivel2Array = new Nivel2[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -168,5 +156,19 @@ public class RealBusiness implements Business {
                 new Nivel5("Estoy *** con mi mejor amiga", "Yo *** la plastilina antes de realizar figuras", "hablando", "ablando"),
                 new Nivel5("Este curriculum no es *** para este puesto de trabajo", "Se ha escuchado un *** en la granja", "valido", "balido")
         };
+    }
+
+    private String getPath(String path, String nickname, Integer pin) {
+        String completePath = String.format(path+"?nickname=%s",nickname);
+        if (pin!=null)
+        {
+            completePath.concat(String.format("&&pin=%d",pin.intValue()));
+        }
+        return completePath;
+    }
+
+    public JSONObject getNivelJSON(String path, String nickname, Integer pin) throws IOException, JSONException {
+        String completePath = getPath(path,nickname,pin);
+        return restClient.getJson(completePath);
     }
 }
