@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -68,18 +69,30 @@ public class RealBusiness implements Business {
 
     @Override
     public Nivel1[] getNivel1(String nickname, Integer pin) {
-        return new Nivel1 [] {
-                new Nivel1("correcta","incorrecta",1),
-                new Nivel1("incorrecta","correcta",2),
-                new Nivel1("correcta","incorrecta",1),
-                new Nivel1("incorrecta","correcta",2),
-                new Nivel1("correcta","incorrecta",1),
-                new Nivel1("incorrecta","correcta",2),
-                new Nivel1("correcta","incorrecta",1),
-                new Nivel1("incorrecta","correcta",2),
-                new Nivel1("correcta","incorrecta",1),
-                new Nivel1("incorrecta","correcta",2)
-        };
+        String path;
+        Nivel1[] nivel1Array = null;
+        path = String.format("getNivel1?nickname=%s",nickname);
+        if (pin!=null)
+        {
+            path.concat(String.format("&&pin=%d",pin.intValue()));
+        }
+        try {
+            JSONObject jsonObject = restClient.getJson(path);
+            JSONArray jsonArray = jsonObject.getJSONArray("nivel1");
+            nivel1Array = new Nivel1[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject nivel1JSON = jsonArray.getJSONObject(i);
+                Nivel1 nivel1 = new Nivel1();
+                nivel1.setCorrecta(nivel1JSON.getInt("correcta"));
+                nivel1.setPalabra1(nivel1JSON.getString("palabra1"));
+                nivel1.setPalabra2(nivel1JSON.getString("palabra2"));
+                nivel1Array[i] = nivel1;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return nivel1Array;
     }
 
     public Nivel2[] getNivel2(String nickname, Integer pin) {

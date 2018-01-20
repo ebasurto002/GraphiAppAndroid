@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ public class Level1Activity extends drawerStudentActivity {
     private int index;
     private int correctas;
     private Nivel1[] levelArray;
+    private String nickname;
+    private Integer pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +27,18 @@ public class Level1Activity extends drawerStudentActivity {
         inflater.inflate(R.layout.activity_level1,frameLayout,true);
 
         StudentData studentData = StudentData.getInstance();
-        levelArray = business.getNivel1(studentData.getNickname(),null);
+        nickname = studentData.getNickname();
+        pin = null;
+
         index=0;
         correctas=0;
-        setTextButtons();
 
         Button button1 = findViewById(R.id.level1word1);
         Button button2 = findViewById(R.id.level1word2);
         button1.setOnClickListener(new buttonOnClickListener(1));
         button2.setOnClickListener(new buttonOnClickListener(2));
+
+        new getLevelTask(this).execute();
     }
 
     private void setTextButtons() {
@@ -78,5 +84,34 @@ public class Level1Activity extends drawerStudentActivity {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
         goBack(null);
+    }
+
+    private class getLevelTask extends ProgressTask<Nivel1[]>
+    {
+
+        public getLevelTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Nivel1[] work() throws Exception {
+            return business.getNivel1(nickname,pin);
+        }
+
+        @Override
+        protected void onFinish(Nivel1[] result) {
+            levelArray = result;
+            if (levelArray != null) {
+                setTextButtons();
+                Button button1 = findViewById(R.id.level1word1);
+                Button button2 = findViewById(R.id.level1word2);
+                button1.setEnabled(true);
+                button2.setEnabled(true);
+            }
+            else
+            {
+                Toast.makeText(Level1Activity.this, "No se ha podido obtener los ejercicios del servidor",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

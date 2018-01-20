@@ -9,7 +9,7 @@ public class StudentData {
     }
 
     public String getNickname() {
-        return "eb00";
+        return "eb000";
         //TODO Cambiar cuando esté el registro
         //return nickname;
     }
