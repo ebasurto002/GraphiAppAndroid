@@ -96,11 +96,11 @@ public class RealBusiness implements Business {
             JSONArray jsonArray = jsonObject.getJSONArray("nivel2");
             nivel2Array = new Nivel2[jsonArray.length()];
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject nivel1JSON = jsonArray.getJSONObject(i);
+                JSONObject nivel2JSON = jsonArray.getJSONObject(i);
                 Nivel2 nivel2 = new Nivel2();
-                nivel2.setAudio(nivel1JSON.getString("audio"));
-                nivel2.setPalabra(nivel1JSON.getString("palabra"));
-                nivel2.setTildada(nivel1JSON.getInt("tildada"));
+                nivel2.setAudio(nivel2JSON.getString("audio"));
+                nivel2.setPalabra(nivel2JSON.getString("palabra"));
+                nivel2.setTildada(nivel2JSON.getInt("tildada"));
                 nivel2Array[i] = nivel2;
             }
         } catch (Exception e)
