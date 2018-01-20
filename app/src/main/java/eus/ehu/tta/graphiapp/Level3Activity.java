@@ -27,7 +27,8 @@ public class Level3Activity extends drawerStudentActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_level3,frameLayout,true);
 
-        levelArray = business.getNivel3(null);
+        StudentData studentData = StudentData.getInstance();
+        levelArray = business.getNivel3(studentData.getNickname(),null);
         index=0;
         correctas=0;
 
