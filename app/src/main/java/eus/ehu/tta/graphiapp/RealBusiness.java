@@ -147,18 +147,23 @@ public class RealBusiness implements Business {
 
     @Override
     public Nivel4[] getNivel4(String nickname, Integer pin) {
-        return new Nivel4[] {
-                new Nivel4("Descubre que es canival tras morderse la lengua y querer repetir", 4),
-                new Nivel4("Denuncian situaziones laborables que perjudican a adolescentes", 2),
-                new Nivel4("La ambruna crece en todo el mundo", 2),
-                new Nivel4("La venta de las bibiendas ha aumentado un 50%", 5),
-                new Nivel4("El Rei hace público un sueldo de 292.000€ brutos al año", 2),
-                new Nivel4("Un abión español se estrella en Turquia por tercera vez lo que va en de año", 2),
-                new Nivel4("Condenan a ocho de los tres akusados por secuestrar a un menor", 7),
-                new Nivel4("Rova un coche para aparcarlo mejor", 1),
-                new Nivel4("Los presos de las cárceles españolas critican la hentrada en masa de “gente normal”", 9),
-                new Nivel4("Dios admite en el Sielo al primer pecador", 5)
-        };
+        Nivel4[] nivel4Array = null;
+        try {
+            JSONObject jsonObject = getNivelJSON("nivel4.json",nickname,pin);
+            JSONArray jsonArray = jsonObject.getJSONArray("nivel4");
+            nivel4Array = new Nivel4[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject nivel4JSON = jsonArray.getJSONObject(i);
+                Nivel4 nivel4 = new Nivel4();
+                nivel4.setTitular(nivel4JSON.getString("titular"));
+                nivel4.setIncorrecta(nivel4JSON.getInt("incorrecta"));
+                nivel4Array[i] = nivel4;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return nivel4Array;
     }
 
     @Override

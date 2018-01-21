@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,8 @@ public class Level4Activity extends drawerStudentActivity {
     private int index;
     private int correctas;
     private Nivel4[] levelArray;
+    private String nickname;
+    private Integer pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +39,13 @@ public class Level4Activity extends drawerStudentActivity {
         inflater.inflate(R.layout.activity_level4, frameLayout, true);
 
         StudentData studentData = StudentData.getInstance();
-        levelArray = business.getNivel4(studentData.getNickname(),null);
+        nickname = studentData.getNickname();
+        pin = null;
+
         index = 0;
         correctas = 0;
 
-        setNewspaperHeader();
+        new getLevelTask(this).execute();
     }
 
     private void setNewspaperHeader() {
@@ -101,5 +106,30 @@ public class Level4Activity extends drawerStudentActivity {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
         goBack(null);
+    }
+
+    private class getLevelTask extends ProgressTask<Nivel4[]>
+    {
+
+        public getLevelTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Nivel4[] work() throws Exception {
+            return business.getNivel4(nickname,pin);
+        }
+
+        @Override
+        protected void onFinish(Nivel4[] result) {
+            levelArray = result;
+            if (levelArray != null) {
+                setNewspaperHeader();
+            }
+            else
+            {
+                Toast.makeText(Level4Activity.this, "No se ha podido obtener los ejercicios del servidor",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
