@@ -56,9 +56,11 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/level5ConfirmButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/confirm"
+        android:enabled="false"
         android:onClick="checkWords"/>
 
     <Button

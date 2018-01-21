@@ -1,9 +1,11 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -18,6 +20,8 @@ public class Level5Activity extends drawerStudentActivity {
     private int index;
     private int correctas;
     private Nivel5[] levelArray;
+    private String nickname;
+    private Integer pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +31,13 @@ public class Level5Activity extends drawerStudentActivity {
         inflater.inflate(R.layout.activity_level5,frameLayout,true);
 
         StudentData studentData = StudentData.getInstance();
-        levelArray = business.getNivel5(studentData.getNickname(),null);
+        nickname = studentData.getNickname();
+        pin = null;
+
         index=0;
         correctas=0;
 
-        setViews();
+        new getLevelTask(this).execute();
     }
 
     private void setViews() {
@@ -113,5 +119,32 @@ public class Level5Activity extends drawerStudentActivity {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
         goBack(null);
+    }
+
+    private class getLevelTask extends ProgressTask<Nivel5[]>
+    {
+
+        public getLevelTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Nivel5[] work() throws Exception {
+            return business.getNivel5(nickname,pin);
+        }
+
+        @Override
+        protected void onFinish(Nivel5[] result) {
+            levelArray = result;
+            if (levelArray != null) {
+                setViews();
+                Button confirmButton = findViewById(R.id.level5ConfirmButton);
+                confirmButton.setEnabled(true);
+            }
+            else
+            {
+                Toast.makeText(Level5Activity.this, "No se ha podido obtener los ejercicios del servidor",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
