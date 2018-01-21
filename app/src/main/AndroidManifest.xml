@@ -32,6 +32,7 @@
         <activity android:name=".Level3Activity" android:label="@string/level3Label" />
         <activity android:name=".Level4Activity" android:label="@string/level4Label" />
         <activity android:name=".Level5Activity" android:label="@string/level5Label" />
+        <activity android:name=".Level8Activity" android:label="@string/level8Label" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".TeacherHomeActivity" />
         <activity android:name=".coreActivity" />

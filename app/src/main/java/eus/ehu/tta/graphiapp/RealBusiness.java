@@ -17,6 +17,7 @@ import eus.ehu.tta.graphiapp.Levels.Nivel2;
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
 import eus.ehu.tta.graphiapp.Levels.Nivel4;
 import eus.ehu.tta.graphiapp.Levels.Nivel5;
+import eus.ehu.tta.graphiapp.Levels.Nivel8;
 
 /**
  * Created by estre on 19/01/2018.
@@ -187,6 +188,27 @@ public class RealBusiness implements Business {
             e.printStackTrace();
         }
         return nivel5Array;
+    }
+
+    @Override
+    public Nivel8[] getNivel8(String nickname, Integer pin) {
+        Nivel8[] nivel8Array = null;
+        try {
+            JSONObject jsonObject = getNivelJSON("nivel8.json",nickname,pin);
+            JSONArray jsonArray = jsonObject.getJSONArray("nivel8");
+            nivel8Array = new Nivel8[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject nivel8JSON = jsonArray.getJSONObject(i);
+                Nivel8 nivel8 = new Nivel8();
+                nivel8.setPalabra(nivel8JSON.getString("palabra"));
+                nivel8.setAcento(nivel8JSON.getInt("acento"));
+                nivel8Array[i] = nivel8;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return nivel8Array;
     }
 
     private String getPath(String path, String nickname, Integer pin) {

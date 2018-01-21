@@ -5,6 +5,7 @@ import eus.ehu.tta.graphiapp.Levels.Nivel2;
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
 import eus.ehu.tta.graphiapp.Levels.Nivel4;
 import eus.ehu.tta.graphiapp.Levels.Nivel5;
+import eus.ehu.tta.graphiapp.Levels.Nivel8;
 
 public class BusinessMock implements Business {
 
@@ -107,5 +108,9 @@ public class BusinessMock implements Business {
             new Nivel5("Estoy *** con mi mejor amiga", "Yo *** la plastilina antes de realizar figuras", "hablando", "ablando"),
             new Nivel5("Este curriculum no es *** para este puesto de trabajo", "Se ha escuchado un *** en la granja", "valido", "balido")
         };
+    }
+
+    public Nivel8[] getNivel8(String nickname, Integer pin) {
+        return null;
     }
 }

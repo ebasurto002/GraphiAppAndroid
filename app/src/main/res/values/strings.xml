@@ -49,4 +49,8 @@
     <string name="level4Label">Nivel 4</string>
     <string name="level5Label">Nivel 5</string>
     <string name="loginErrorToast">Error al inicio. Login, contraseña o tipo de usuario incorrecto</string>
+    <string name="level8Label">Nivel 8</string>
+    <string name="agudas">Agudas</string>
+    <string name="llanas">Llanas</string>
+    <string name="esdrujulas">Esdrújulas</string>
 </resources>
