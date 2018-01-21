@@ -1,5 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ public class Level3Activity extends drawerStudentActivity {
     private int index;
     private int correctas;
     private Nivel3[] levelArray;
+    private String nickname;
+    private Integer pin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +31,13 @@ public class Level3Activity extends drawerStudentActivity {
         inflater.inflate(R.layout.activity_level3,frameLayout,true);
 
         StudentData studentData = StudentData.getInstance();
-        levelArray = business.getNivel3(studentData.getNickname(),null);
+        nickname = studentData.getNickname();
+        pin = null;
+
         index=0;
         correctas=0;
 
-        setViews();
-        Button button1 = findViewById(R.id.level3Word1);
-        button1.setOnClickListener(new ButtonOnClickListener(1));
-        Button button2 = findViewById(R.id.level3Word2);
-        button2.setOnClickListener(new ButtonOnClickListener(2));
+        new getLevelTask(this).execute();
     }
 
     private void setViews() {
@@ -81,5 +82,37 @@ public class Level3Activity extends drawerStudentActivity {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
         goBack(null);
+    }
+
+
+    private class getLevelTask extends ProgressTask<Nivel3[]>
+    {
+
+        public getLevelTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Nivel3[] work() throws Exception {
+            return business.getNivel3(nickname,pin);
+        }
+
+        @Override
+        protected void onFinish(Nivel3[] result) {
+            levelArray = result;
+            if (levelArray != null) {
+                setViews();
+                Button button1 = findViewById(R.id.level3Word1);
+                button1.setEnabled(true);
+                button1.setOnClickListener(new ButtonOnClickListener(1));
+                Button button2 = findViewById(R.id.level3Word2);
+                button2.setOnClickListener(new ButtonOnClickListener(2));
+                button2.setEnabled(true);
+            }
+            else
+            {
+                Toast.makeText(Level3Activity.this, "No se ha podido obtener los ejercicios del servidor",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

@@ -10,6 +10,6 @@ public class coreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        business = new RealBusiness();
+        business = new RealBusiness(this);
     }
 }

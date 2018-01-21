@@ -1,10 +1,15 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
@@ -19,6 +24,13 @@ import eus.ehu.tta.graphiapp.Levels.Nivel5;
 
 public class RealBusiness implements Business {
     protected RestClient restClient = new RestClient("http://u017633.ehu.eus:28080/GraphiAppServer/rest/GraphiApp");
+    private Context context;
+
+    public RealBusiness(Context context)
+    {
+        this.context = context;
+    }
+
     @Override
     public String register(String name, String surname, String password, int userType) {
         try {
@@ -112,18 +124,25 @@ public class RealBusiness implements Business {
 
     @Override
     public Nivel3[] getNivel3(String nickname, Integer pin) {
-        return new Nivel3[] {
-                new Nivel3( "Abrasar", "Abrazar", 2,"http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Abrazar.jpg"),
-                new Nivel3( "Hasta", "Asta", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Asta.jpg"),
-                new Nivel3( "Barón", "Varón", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Baron.jpg"),
-                new Nivel3( "Cabo", "Cavó", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Cabo.jpg"),
-                new Nivel3( "Sumo", "Zumo", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Sumo.jpg"),
-                new Nivel3( "Sabia", "Sabía", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Sabia.jpg"),
-                new Nivel3( "Arrollo", "Arroyo", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Arroyo.jpg"),
-                new Nivel3( "Vaca", "Baca", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Baca.jpg"),
-                new Nivel3( "Hola", "Ola", 2, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Ola.jpg"),
-                new Nivel3( "Bobina", "Bovina", 1, "http://u017633.ehu.eus:28080/GraphiAppServer/img/nivel3/Bobina.jpg")
-        };
+        Nivel3[] nivel3Array = null;
+        try {
+            JSONObject jsonObject = getNivelJSON("nivel3.json",nickname,pin);
+            JSONArray jsonArray = jsonObject.getJSONArray("nivel3");
+            nivel3Array = new Nivel3[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject nivel3JSON = jsonArray.getJSONObject(i);
+                Nivel3 nivel3 = new Nivel3();
+                nivel3.setPalabra1(nivel3JSON.getString("palabra1"));
+                nivel3.setPalabra2(nivel3JSON.getString("palabra2"));
+                nivel3.setCorrecta(nivel3JSON.getInt("correcta"));
+                nivel3.setUrlImagen(nivel3JSON.getString("urlImagen"));
+                nivel3Array[i] = nivel3;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return nivel3Array;
     }
 
     @Override
@@ -168,7 +187,51 @@ public class RealBusiness implements Business {
     }
 
     public JSONObject getNivelJSON(String path, String nickname, Integer pin) throws IOException, JSONException {
-        String completePath = getPath(path,nickname,pin);
-        return restClient.getJson(completePath);
+        if (!path.endsWith(".json")) {
+            String completePath = getPath(path, nickname, pin);
+            return restClient.getJson(completePath);
+        }
+
+        else
+        {
+            return readJSONFromStorage(path,pin);
+        }
+    }
+
+    private JSONObject readJSONFromStorage(String path, Integer pin) throws IOException, JSONException {
+        InputStream is = context.getAssets().open("json/"+path);
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+        byte [] buffer = new byte [1024];
+        StringBuffer json = new StringBuffer();
+        String line;
+        while ((line=br.readLine())!=null)
+        {
+            json.append(line);
+        }
+        JSONObject jsonObject = new JSONObject(json.toString());
+        String[] fileNameSplit = path.split("\\.");
+        String levelName = fileNameSplit[0];
+        JSONArray array = jsonObject.getJSONArray(levelName);
+        JSONArray newArray = new JSONArray();
+        if (pin==null) {
+            for (int i = 0; i < 10; i++) {
+                int random = (int) (Math.random() * array.length());
+                newArray.put(array.get(random));
+                array.remove(random);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 10; i++) {
+                if (array.getJSONObject(i).getInt("pin") == pin.intValue())
+                {
+                    newArray.put(array.getJSONObject(i));
+                }
+            }
+        }
+        JSONObject newJSONObject = new JSONObject();
+        newJSONObject.put(levelName,newArray);
+        return newJSONObject;
     }
 }
