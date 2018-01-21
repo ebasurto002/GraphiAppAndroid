@@ -14,7 +14,6 @@ public class LoginActivity extends coreActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        this.business = new RealBusiness();
     }
 
     public void login(View view){

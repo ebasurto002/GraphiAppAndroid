@@ -10,13 +10,10 @@ import android.widget.Toast;
 
 public class MainActivity extends coreActivity {
 
-    Business negocio;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        negocio = new RealBusiness();
     }
 
     public void goToLogin(View view){
@@ -46,7 +43,7 @@ public class MainActivity extends coreActivity {
             new ProgressTask<String>(this){
                 @Override
                 protected String work(){
-                    String nickname = negocio.register(nombre, apellidos, password, tipoUsuario);
+                    String nickname = business.register(nombre, apellidos, password, tipoUsuario);
                     return nickname;
                 }
 
