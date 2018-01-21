@@ -21,12 +21,12 @@
     <Button
         android:id="@+id/level3Word2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:enabled="false"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/back"
-        android:onClick="goBack"
-        android:enabled="false"/>
+        android:onClick="goBack" />
 </LinearLayout>
