@@ -215,10 +215,17 @@ public class RealBusiness implements Business {
         JSONArray array = jsonObject.getJSONArray(levelName);
         JSONArray newArray = new JSONArray();
         if (pin==null) {
-            for (int i = 0; i < 10; i++) {
-                int random = (int) (Math.random() * array.length());
-                newArray.put(array.get(random));
-                array.remove(random);
+            if (array.length()<=10)
+            {
+                newArray = array;
+            }
+            else
+            {
+                for (int i = 0; i < 10; i++) {
+                    int random = (int) (Math.random() * array.length());
+                    newArray.put(array.get(random));
+                    array.remove(random);
+                }
             }
         }
         else
