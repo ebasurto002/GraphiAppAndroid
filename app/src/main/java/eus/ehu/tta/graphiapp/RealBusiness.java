@@ -223,7 +223,7 @@ public class RealBusiness implements Business {
         }
         else
         {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < array.length(); i++) {
                 if (array.getJSONObject(i).getInt("pin") == pin.intValue())
                 {
                     newArray.put(array.getJSONObject(i));
