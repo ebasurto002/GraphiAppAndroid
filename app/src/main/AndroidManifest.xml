@@ -60,7 +60,8 @@
         <activity android:name=".PostLevel3Activity" />
         <activity android:name=".PostLevel4Activity" />
         <activity android:name=".PostLevel5Activity" />
-        <activity android:name=".PostLevel8Activity"></activity>
+        <activity android:name=".PostLevel8Activity" />
+        <activity android:name=".TrackingActivity"></activity>
     </application>
 
 </manifest>

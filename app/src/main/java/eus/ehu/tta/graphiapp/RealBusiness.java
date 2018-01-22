@@ -87,6 +87,30 @@ public class RealBusiness implements Business {
     }
 
     @Override
+    public JSONObject getClasses(String nickname) {
+        try{
+            JSONObject json = restClient.getJson("getClass?nickname="+nickname);
+            return json;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public JSONObject getResults(String nickname, String tematica) {
+        try{
+            JSONObject json = restClient.getJson("getResults?nickname="+nickname+"&tematica="+tematica);
+            return json;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public Nivel1[] getNivel1(Integer pin) {
         return new Nivel1 [] {
                 new Nivel1("correcta","incorrecta",1),

@@ -1,5 +1,7 @@
 package eus.ehu.tta.graphiapp;
 
+import org.json.JSONObject;
+
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
 import eus.ehu.tta.graphiapp.Levels.Nivel2;
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
@@ -20,4 +22,6 @@ public interface Business {
     public abstract Nivel4[] getNivel4(Integer pin);
     public abstract Nivel5[] getNivel5(Integer pin);
     public abstract String registerClass(String tematica, int fecha, String login);
+    public abstract JSONObject getClasses(String nickname);
+    public abstract JSONObject getResults(String nickname, String tematica);
 }

@@ -7,7 +7,7 @@ package eus.ehu.tta.graphiapp;
 public class TeacherData {
 
 
-    private TeacherData instance = null;
+    private static TeacherData instance = null;
     private String login;
     private int idClase;
 
@@ -15,7 +15,7 @@ public class TeacherData {
 
     }
 
-    public TeacherData getInstance() {
+    public static TeacherData getInstance() {
         if (instance == null){
             instance = new TeacherData();
         }

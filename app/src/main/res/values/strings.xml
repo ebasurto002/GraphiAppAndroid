@@ -73,4 +73,12 @@
     <string name="graveStress">Esdrújula</string>
     <string name="acuteStress">Aguda</string>
     <string name="plainStress">Llana</string>
+    <string name="onClassRetrieveFail">Error al descargarse las clases</string>
+    <string name="resultsName">Alumno </string>
+    <string name="resultsL1">Nivel 1 </string>
+    <string name="resultsL2">Nivel 2 </string>
+    <string name="resultsL3">Nivel 3 </string>
+    <string name="resultsL4">Nivel 4 </string>
+    <string name="resultsL5">Nivel 5 </string>
+    <string name="resultsL8">Nivel 8 </string>
 </resources>
