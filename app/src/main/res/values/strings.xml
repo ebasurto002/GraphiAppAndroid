@@ -52,4 +52,25 @@
     <string name="newClassHint">Introduce el nombre de la clase</string>
     <string name="postClassStartBtn">Empieza a postear</string>
     <string name="registerClassError">No se ha podido registrar la clase</string>
+    <string name="correctWord">Palabra correcta: </string>
+    <string name="incorrectWord">Palabra incorrecta: </string>
+    <string name="addExercise">AÑADIR</string>
+    <string name="nextLevel">SIGUIENTE NIVEL</string>
+    <string name="endPosting">ACABAR</string>
+    <string name="noStressWord">Palabra sin tilde: </string>
+    <string name="stressPosition">Posición de la tilde: </string>
+    <string name="audioRec">GRABAR AUDIO</string>
+    <string name="previousLevel">Nivel Anterior</string>
+    <string name="picPicker">SELECCIONA IMAGEN</string>
+    <string name="headLineString">Introduce el titular: </string>
+    <string name="iWordPos">Posición de la palabra a corregir: </string>
+    <string name="sWording1">Introduce la frase 1. Denota el hueco con 3 asteriscos: </string>
+    <string name="sWording2">Introduce la frase 2. Denota el hueco con 3 asteriscos: </string>
+    <string name="wWording1">Introduce la palabra correcta para la frase 1:  </string>
+    <string name="wWording2">Introduce la palabra correcta para la frase 2:  </string>
+    <string name="wordL8">Introduce la palabra: </string>
+    <string name="kindaStress">¿Qué acentuación tiene?</string>
+    <string name="graveStress">Esdrújula</string>
+    <string name="acuteStress">Aguda</string>
+    <string name="plainStress">Llana</string>
 </resources>

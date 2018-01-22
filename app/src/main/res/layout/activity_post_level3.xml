@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eus.ehu.tta.graphiapp.PostLevel1Activity"
+    tools:context="eus.ehu.tta.graphiapp.PostLevel3Activity"
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/correctWord"/>
     <EditText
-        android:id="@+id/cWordL1"
+        android:id="@+id/cWordL3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
@@ -19,18 +19,29 @@
         android:layout_height="wrap_content"
         android:text="@string/incorrectWord"/>
     <EditText
-        android:id="@+id/iWordL1"
+        android:id="@+id/iWordL3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
-        android:id="@+id/l1AddBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/picPicker"/>
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/addExercise"/>
-    <Button
-        android:id="@+id/toLevel2"
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nextLevel"/>
+        android:columnCount="2">
+        <Button
+            android:layout_width="wrap_content"
+            android:text="@string/previousLevel"
+            android:layout_gravity="left"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:text="@string/nextLevel"
+            android:layout_gravity="right"/>
+    </GridLayout>
 
 </LinearLayout>

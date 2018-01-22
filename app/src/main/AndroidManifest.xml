@@ -55,7 +55,12 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".TeacherHomeActivity" />
         <activity android:name=".coreActivity" />
-        <activity android:name=".PostLevel1Activity"></activity>
+        <activity android:name=".PostLevel1Activity" />
+        <activity android:name=".PostLevel2Activity" />
+        <activity android:name=".PostLevel3Activity" />
+        <activity android:name=".PostLevel4Activity" />
+        <activity android:name=".PostLevel5Activity" />
+        <activity android:name=".PostLevel8Activity"></activity>
     </application>
 
 </manifest>
