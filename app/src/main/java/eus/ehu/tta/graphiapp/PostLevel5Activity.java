@@ -3,7 +3,7 @@ package eus.ehu.tta.graphiapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class PostLevel5Activity extends AppCompatActivity {
+public class PostLevel5Activity extends coreActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -116,24 +116,7 @@ public class TeacherHomeActivity extends drawerTeacherActivity {
         }
     }
     public void goToResults(final String className){
-        final String login = getIntent().getStringExtra(EXTRA_LOGIN);
-
-        new ProgressTask<JSONObject>(this){
-            @Override
-            protected JSONObject work() {
-                try{
-                    return business.getResults(login,className);
-                }
-                catch(Exception e){
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onFinish(JSONObject result) {
-
-            }
-        }.execute();
+        Intent intent = new Intent(this,TrackingActivity.class);
+        startActivity(intent);
     }
 }
