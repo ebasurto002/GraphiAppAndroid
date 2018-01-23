@@ -23,7 +23,6 @@ public class TeacherHomeActivity extends drawerTeacherActivity {
 
     public static final String EXTRA_LOGIN = "login";
     public static int CLASS_ID = 0;
-    protected Business business = new RealBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
