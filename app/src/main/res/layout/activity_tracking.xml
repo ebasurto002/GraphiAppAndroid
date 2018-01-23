@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="eus.ehu.tta.graphiapp.TrackingActivity"
-    android:columnCount="7">
+    android:columnCount="7"
+    android:id="@+id/trackingLayout">
     <TextView android:text="@string/resultsName"/>
     <TextView android:text="@string/resultsL1"/>
     <TextView android:text="@string/resultsL2"/>

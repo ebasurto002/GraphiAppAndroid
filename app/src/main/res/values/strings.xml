@@ -81,4 +81,5 @@
     <string name="resultsL4">Nivel 4 </string>
     <string name="resultsL5">Nivel 5 </string>
     <string name="resultsL8">Nivel 8 </string>
+    <string name="onResultRetrieveFail">Error al descargar los resultados</string>
 </resources>

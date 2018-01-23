@@ -50,6 +50,8 @@ public class LoginActivity extends coreActivity {
                     }
                     else{
                         Intent intent = new Intent(LoginActivity.this,TeacherHomeActivity.class);
+                        TeacherData td = TeacherData.getInstance();
+                        td.setLogin(login);
                         intent.putExtra(TeacherHomeActivity.EXTRA_LOGIN, login);
                         startActivity(intent);
                     }

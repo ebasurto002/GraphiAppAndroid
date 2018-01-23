@@ -116,6 +116,7 @@ public class TeacherHomeActivity extends drawerTeacherActivity {
     }
     public void goToResults(final String className){
         Intent intent = new Intent(this,TrackingActivity.class);
+        intent.putExtra(TrackingActivity.CLASS_NAME,className);
         startActivity(intent);
     }
 }
