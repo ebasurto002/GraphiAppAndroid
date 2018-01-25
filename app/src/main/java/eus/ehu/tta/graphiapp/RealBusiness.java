@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Random;
 
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
@@ -103,6 +104,40 @@ public class RealBusiness implements Business {
         try{
             JSONObject json = restClient.getJson("getResults?nickname="+nickname+"&tematica="+tematica);
             return json;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public String postLevel1(String correcta, String incorrecta, String nickname) {
+        try{
+            JSONObject level1json = new JSONObject();
+            Random rdn = new Random();
+            int order = rdn.nextInt(2) + 1;
+
+            if(order == 1){
+                level1json.put("correcta", order);
+                level1json.put("palabra1",correcta);
+                level1json.put("palabra2",incorrecta);
+                level1json.put("clase", TeacherData.getInstance().getIdClase());
+            }
+            else{
+                level1json.put("correcta", order);
+                level1json.put("palabra1",incorrecta);
+                level1json.put("palabra2",correcta);
+                level1json.put("clase", TeacherData.getInstance().getIdClase());
+            }
+
+            JSONObject json = new JSONObject();
+            json.put("nivel1JSON",level1json);
+            json.put("login",nickname);
+            String response = restClient.postJsonwithString(json, "postNivel1");
+
+            return response;
+
         }
         catch(Exception e){
             e.printStackTrace();

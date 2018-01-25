@@ -24,4 +24,5 @@ public interface Business {
     public abstract String registerClass(String tematica, int fecha, String login);
     public abstract JSONObject getClasses(String nickname);
     public abstract JSONObject getResults(String nickname, String tematica);
+    public abstract String postLevel1(String correcta, String incorrecta, String nickname);
 }

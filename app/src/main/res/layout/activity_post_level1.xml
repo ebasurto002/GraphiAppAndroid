@@ -26,7 +26,8 @@
         android:id="@+id/l1AddBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/addExercise"/>
+        android:text="@string/addExercise"
+        android:onClick="addL1Exercise"/>
     <Button
         android:id="@+id/toLevel2"
         android:layout_width="match_parent"

@@ -82,4 +82,6 @@
     <string name="resultsL5">Nivel 5 </string>
     <string name="resultsL8">Nivel 8 </string>
     <string name="onResultRetrieveFail">Error al descargar los resultados</string>
+    <string name="onPostLevel1Fail">Error. No se ha añadido el ejercicio</string>
+    <string name="onPostLevel1Success">Se ha añadido el ejercicio correctamente</string>
 </resources>

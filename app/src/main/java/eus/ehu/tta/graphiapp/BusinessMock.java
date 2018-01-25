@@ -125,4 +125,9 @@ public class BusinessMock implements Business {
     public JSONObject getResults(String nickname, String tematica) {
         return null;
     }
+
+    @Override
+    public String postLevel1(String correcta, String incorrecta, String nickname) {
+        return null;
+    }
 }
