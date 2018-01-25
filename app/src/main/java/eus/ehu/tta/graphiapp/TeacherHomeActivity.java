@@ -30,7 +30,8 @@ public class TeacherHomeActivity extends drawerTeacherActivity {
         FrameLayout frameLayout = findViewById(R.id.content_frame);
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_teacher_home, frameLayout, true);
-        final String login = getIntent().getStringExtra(EXTRA_LOGIN);
+        TeacherData td = TeacherData.getInstance();
+        final String login = td.getLogin();
         new ProgressTask<JSONObject>(this) {
 
             @Override
