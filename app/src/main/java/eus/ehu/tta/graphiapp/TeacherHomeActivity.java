@@ -77,7 +77,7 @@ public class TeacherHomeActivity extends drawerTeacherActivity {
         String dateString = df.format(calendar.getTime());
         Toast.makeText(this, dateString, Toast.LENGTH_LONG); //De momento, para pruebas del formato de fecha
         final int date = Integer.parseInt(dateString);
-        final String login = getIntent().getStringExtra(EXTRA_LOGIN);
+        final String login = TeacherData.getInstance().getLogin();
         new ProgressTask<String>(this) {
             @Override
             protected String work() {
