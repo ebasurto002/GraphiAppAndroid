@@ -1,6 +1,7 @@
 package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
+import android.net.Uri;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.util.Random;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
@@ -155,6 +157,48 @@ public class RealBusiness implements Business {
         catch(Exception e){
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public boolean uploadFile(Uri uri, Context c, String filename) {
+        try{
+            InputStream is = c.getContentResolver().openInputStream(uri);
+            int i = restClient.postFile("uploadFile",is,filename);
+            if(i == HttpURLConnection.HTTP_OK){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch(Exception e){
+
+        }
+        return false;
+    }
+
+    @Override
+    public String postLevel2(String unstressedWord, int stressPos, String filename, String nickname) {
+         try{
+             JSONObject level2 = new JSONObject();
+             String remoteURL = "http://u017633.ehu.eus:28080/GraphiAppServer/rest/GraphiApp" + "/audio/"+filename;
+             level2.put("audio",remoteURL);
+             level2.put("palabra",unstressedWord);
+             level2.put("tildada",stressPos);
+
+             JSONObject json = new JSONObject();
+             json.put("nivel2JSON",level2);
+             json.put("login",nickname);
+             json.put("url",remoteURL);
+
+             String response = restClient.postJsonwithString(json,"postNivel2");
+             return response;
+         }
+         catch(Exception e){
+             e.printStackTrace();
+         }
+
         return null;
     }
 
