@@ -44,10 +44,10 @@ public class ProfileActivity extends drawerStudentActivity {
         setPuntuaciones();
         studentData = new StudentData(this);
         ImageView imageView = findViewById(R.id.profilePhoto);
-        Uri uriFoto = studentData.getUrlFoto();
-        if (uriFoto != null)
+        String urlFoto = studentData.getUrlFoto();
+        if (urlFoto != null)
         {
-            Glide.with(this).load(String.valueOf(uriFoto)).into(imageView);
+            Glide.with(this).load(String.valueOf(urlFoto)).into(imageView);
         }
         else
         {
@@ -144,7 +144,7 @@ public class ProfileActivity extends drawerStudentActivity {
         switch (requestCode)
         {
             case PICTURE_REQUEST_CODE:
-                studentData.setUrlFoto(Uri.parse(photoPath));
+                studentData.setUrlFoto(photoPath);
                 ImageView imageView = findViewById(R.id.profilePhoto);
                 Glide.with(this).load(photoPath).into(imageView);
                 imageView.setImageURI(Uri.parse(photoPath));

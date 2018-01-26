@@ -27,19 +27,12 @@ public class StudentData {
         prefs = context.getSharedPreferences("eus.ehu.tta.graphiapp." + nickname, Context.MODE_PRIVATE);
     }
 
-    public Uri getUrlFoto() {
-        String url =  prefs.getString("urlFoto", null);
-        Uri uri = null;
-        if (url != null)
-        {
-            uri = Uri.parse(url);
-        }
-        return uri;
+    public String getUrlFoto() {
+        return prefs.getString("urlFoto", null);
     }
 
-    public void setUrlFoto(Uri urlFoto) {
-        String url = String.valueOf(urlFoto);
-        prefs.edit().putString("urlFoto",url).apply();
+    public void setUrlFoto(String urlFoto) {
+        prefs.edit().putString("urlFoto",urlFoto).apply();
     }
 
     public float getResultado(int numero) {
