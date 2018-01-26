@@ -16,7 +16,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/profile" />
+        android:text="@string/profile"
+        android:onClick="goToProfile"/>
 
     <Button
         android:layout_width="match_parent"
