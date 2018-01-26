@@ -2,6 +2,7 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -89,7 +90,7 @@ public class Level2Activity extends drawerStudentActivity {
             index++;
             if (index >= levelArray.length)
             {
-                endLevel();
+                endLevel(2);
             }
 
             else
@@ -99,9 +100,16 @@ public class Level2Activity extends drawerStudentActivity {
         }
     }
 
-    private void endLevel() {
+    private void endLevel(int numNivel) {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
+
+        SharedPreferences sharedPrefs = getSharedPreferences("eus.ehu.tta.graphiapp." + nickname, Context.MODE_PRIVATE);
+        float puntuacionGuardada = sharedPrefs.getFloat("puntuacionNivel" + String.valueOf(numNivel),-1);
+        if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
+        {
+            sharedPrefs.edit().putFloat("puntuacionNivel" + String.valueOf(numNivel),puntuacion).apply();
+        }
         goBack(null);
     }
 

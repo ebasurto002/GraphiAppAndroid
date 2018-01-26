@@ -88,4 +88,5 @@
     <string name="onResultRetrieveFail">Error al descargar los resultados</string>
     <string name="onPostLevel1Fail">Error. No se ha añadido el ejercicio</string>
     <string name="onPostLevel1Success">Se ha añadido el ejercicio correctamente</string>
+    <string name="exerciseNotCompletedYet">No completado</string>
 </resources>

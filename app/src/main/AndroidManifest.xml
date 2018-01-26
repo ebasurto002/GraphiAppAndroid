@@ -22,21 +22,40 @@
         </activity>
         <activity
             android:name=".userHomeActivity"
-            android:label="@string/userHomeLabel" />
+            android:label="@string/userHomeLabel">
+        </activity>
         <activity
             android:name=".applicationHelpActivity"
             android:label="@string/applicationHelpLabel" />
         <activity android:name=".drawerStudentActivity" />
         <activity android:name=".drawerTeacherActivity" />
-        <activity android:name=".GameModesActivity" android:label="@string/gameModesLabel" />
-        <activity android:name=".IndividualModeActivity" android:label="@string/individualModeLabel" />
-        <activity android:name=".LevelsActivity" android:label="@string/levelsLabel" />
-        <activity android:name=".Level1Activity" android:label="@string/level1Label" />
-        <activity android:name=".Level2Activity" android:label="@string/level2Label" />
-        <activity android:name=".Level3Activity" android:label="@string/level3Label" />
-        <activity android:name=".Level4Activity" android:label="@string/level4Label" />
-        <activity android:name=".Level5Activity" android:label="@string/level5Label" />
-        <activity android:name=".Level8Activity" android:label="@string/level8Label" />
+        <activity
+            android:name=".GameModesActivity"
+            android:label="@string/gameModesLabel" />
+        <activity
+            android:name=".IndividualModeActivity"
+            android:label="@string/individualModeLabel" />
+        <activity
+            android:name=".LevelsActivity"
+            android:label="@string/levelsLabel" />
+        <activity
+            android:name=".Level1Activity"
+            android:label="@string/level1Label" />
+        <activity
+            android:name=".Level2Activity"
+            android:label="@string/level2Label" />
+        <activity
+            android:name=".Level3Activity"
+            android:label="@string/level3Label" />
+        <activity
+            android:name=".Level4Activity"
+            android:label="@string/level4Label" />
+        <activity
+            android:name=".Level5Activity"
+            android:label="@string/level5Label" />
+        <activity
+            android:name=".Level8Activity"
+            android:label="@string/level8Label" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".TeacherHomeActivity" />
         <activity android:name=".coreActivity" />
@@ -47,6 +66,7 @@
         <activity android:name=".PostLevel5Activity" />
         <activity android:name=".PostLevel8Activity" />
         <activity android:name=".TrackingActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

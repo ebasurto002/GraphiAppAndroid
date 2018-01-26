@@ -1,10 +1,10 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class drawerStudentActivity extends drawerBaseActivity {
 
@@ -23,7 +23,11 @@ public class drawerStudentActivity extends drawerBaseActivity {
     private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Toast.makeText(drawerStudentActivity.this,String.valueOf(i), Toast.LENGTH_SHORT).show();
+            if (i == 0)
+            {
+                Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -87,13 +88,20 @@ public class Level8Activity extends drawerStudentActivity {
         index++;
         if (index >= levelArray.length)
         {
-            endLevel();
+            endLevel(8);
         }
     }
 
-    private void endLevel() {
+    private void endLevel(int numNivel) {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
+
+        SharedPreferences sharedPrefs = getSharedPreferences("eus.ehu.tta.graphiapp." + nickname, Context.MODE_PRIVATE);
+        float puntuacionGuardada = sharedPrefs.getFloat("puntuacionNivel" + String.valueOf(numNivel),-1);
+        if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
+        {
+            sharedPrefs.edit().putFloat("puntuacionNivel" + String.valueOf(numNivel),puntuacion).apply();
+        }
         goBack(null);
     }
 

@@ -25,4 +25,10 @@ public class IndividualModeActivity extends drawerStudentActivity {
         Intent intent = new Intent(this,LevelsActivity.class);
         startActivity(intent);
     }
+
+    public void goToProfile(View view)
+    {
+        Intent intent = new Intent(this,ProfileActivity.class);
+        startActivity(intent);
+    }
 }
