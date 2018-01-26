@@ -2,6 +2,7 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 public class StudentData {
     private Context context;
@@ -26,12 +27,19 @@ public class StudentData {
         prefs = context.getSharedPreferences("eus.ehu.tta.graphiapp." + nickname, Context.MODE_PRIVATE);
     }
 
-    public String getUrlFoto() {
-        return prefs.getString("urlFoto",null);
+    public Uri getUrlFoto() {
+        String url =  prefs.getString("urlFoto", null);
+        Uri uri = null;
+        if (url != null)
+        {
+            uri = Uri.parse(url);
+        }
+        return uri;
     }
 
-    public void setUrlFoto(String urlFoto) {
-        prefs.edit().putString("urlFoto",urlFoto).apply();
+    public void setUrlFoto(Uri urlFoto) {
+        String url = String.valueOf(urlFoto);
+        prefs.edit().putString("urlFoto",url).apply();
     }
 
     public float getResultado(int numero) {

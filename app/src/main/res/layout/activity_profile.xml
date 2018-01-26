@@ -9,12 +9,15 @@
 
     <ImageView
         android:id="@+id/profilePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:onClick="changeProfilePhoto"/>
     <TextView
         android:id="@+id/userNameText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
     <GridLayout
         android:id="@+id/puntuacionesGrid"

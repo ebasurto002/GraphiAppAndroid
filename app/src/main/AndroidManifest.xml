@@ -3,6 +3,7 @@
     package="eus.ehu.tta.graphiapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -67,6 +68,15 @@
         <activity android:name=".PostLevel8Activity" />
         <activity android:name=".TrackingActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>
+        <provider
+            android:name=".GenericFileProvider"
+            android:authorities="${applicationId}.eus.ehu.tta.ttaejemplo.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

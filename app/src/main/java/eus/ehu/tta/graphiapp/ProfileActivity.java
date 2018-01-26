@@ -1,32 +1,60 @@
 package eus.ehu.tta.graphiapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
+import java.io.IOException;
+
 public class ProfileActivity extends drawerStudentActivity {
 
+    private static final int PICTURE_REQUEST_CODE = 0;
     private String nickname;
+    StudentData studentData;
+
+    Uri pictureUri;
+    File file;
+    private String photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        StudentData studentData = new StudentData(this);
+        studentData = new StudentData(this);
         nickname = studentData.getNickname();
         setPuntuaciones();
-        //StudentData.getInstance();
-        //Glide.with(this).load()
+        studentData = new StudentData(this);
+        ImageView imageView = findViewById(R.id.profilePhoto);
+        Uri uriFoto = studentData.getUrlFoto();
+        if (uriFoto != null)
+        {
+            Glide.with(this).load(String.valueOf(uriFoto)).into(imageView);
+        }
+        else
+        {
+            imageView.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.addphoto));
+        }
+        TextView nameText = findViewById(R.id.userNameText);
+        nameText.setText(nickname);
     }
 
     private void setPuntuaciones() {
@@ -80,5 +108,47 @@ public class ProfileActivity extends drawerStudentActivity {
 
     public void goBack(View view) {
         finish();
+    }
+
+    public void changeProfilePhoto(View view) {
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            Toast.makeText(this, R.string.noCamera, Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                File file = null;
+                try {
+                    file = File.createTempFile("profilePhoto_" + nickname,".jpg",dir);
+                    pictureUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".eus.ehu.tta.ttaejemplo.provider", file);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, pictureUri);
+                    startActivityForResult(intent, PICTURE_REQUEST_CODE);
+                    photoPath = file.getAbsolutePath();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(this, R.string.no_app, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        Uri uri;
+        String filename;
+
+        if (resultCode != Activity.RESULT_OK)
+            return;
+        switch (requestCode)
+        {
+            case PICTURE_REQUEST_CODE:
+                studentData.setUrlFoto(Uri.parse(photoPath));
+                ImageView imageView = findViewById(R.id.profilePhoto);
+                Glide.with(this).load(photoPath).into(imageView);
+                imageView.setImageURI(Uri.parse(photoPath));
+                break;
+        }
     }
 }
