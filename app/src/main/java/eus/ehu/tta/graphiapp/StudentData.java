@@ -1,36 +1,44 @@
 package eus.ehu.tta.graphiapp;
 
-public class StudentData {
-    private static StudentData instance = null;
-    private String nickname;
-    double[] resultados = new double [8];
+import android.content.Context;
+import android.content.SharedPreferences;
 
-    private StudentData() {
+public class StudentData {
+    private Context context;
+    private SharedPreferences prefs;
+    private SharedPreferences defaultSharedPreferences;
+
+    public StudentData(Context context) {
+        this.context = context;
+        defaultSharedPreferences = context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE);
+        String nickname = defaultSharedPreferences.getString("currentNickname",null);
+        if (nickname != null) {
+            prefs = context.getSharedPreferences("eus.ehu.tta.graphiapp." + nickname, Context.MODE_PRIVATE);
+        }
     }
 
     public String getNickname() {
-        return "eb000";
-        //TODO Cambiar cuando esté el registro
-        //return nickname;
+        return defaultSharedPreferences.getString("currentNickname",null);
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        defaultSharedPreferences.edit().putString("currentNickname",nickname).apply();
+        prefs = context.getSharedPreferences("eus.ehu.tta.graphiapp." + nickname, Context.MODE_PRIVATE);
     }
 
-    public double[] getResultados() {
-        return resultados;
+    public String getUrlFoto() {
+        return prefs.getString("urlFoto",null);
     }
 
-    public void setResultados(double[] resultados) {
-        this.resultados = resultados;
+    public void setUrlFoto(String urlFoto) {
+        prefs.edit().putString("urlFoto",urlFoto).apply();
     }
 
-    public static synchronized StudentData getInstance() {
-        if (instance == null)
-        {
-            instance = new StudentData();
-        }
-        return instance;
+    public float getResultado(int numero) {
+        return prefs.getFloat("puntuacionNivel" + numero,-1);
+    }
+
+    public void setResultado(float resultado,int numero) {
+        prefs.edit().putFloat("puntuacionNivel" + numero,resultado).apply();
     }
 }

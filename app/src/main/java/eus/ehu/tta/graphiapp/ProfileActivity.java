@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class ProfileActivity extends drawerStudentActivity {
 
     private String nickname;
@@ -20,8 +22,11 @@ public class ProfileActivity extends drawerStudentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        nickname = StudentData.getInstance().getNickname();
+        StudentData studentData = new StudentData(this);
+        nickname = studentData.getNickname();
         setPuntuaciones();
+        //StudentData.getInstance();
+        //Glide.with(this).load()
     }
 
     private void setPuntuaciones() {

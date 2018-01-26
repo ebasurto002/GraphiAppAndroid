@@ -43,7 +43,8 @@ public class LoginActivity extends coreActivity {
                 if(result.booleanValue() == true){
                     if(uType==Business.TIPO_ALUMNO){
                         Intent intent = new Intent(LoginActivity.this,userHomeActivity.class);
-                        StudentData.getInstance().setNickname(login);
+                        StudentData studentData = new StudentData(LoginActivity.this);
+                        studentData.setNickname(login);
                         startActivity(intent);
                     }
                     else{

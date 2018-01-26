@@ -23,6 +23,7 @@ public class Level5Activity extends drawerStudentActivity {
     private Nivel5[] levelArray;
     private String nickname;
     private Integer pin;
+    StudentData studentData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class Level5Activity extends drawerStudentActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_level5,frameLayout,true);
 
-        StudentData studentData = StudentData.getInstance();
+        studentData = new StudentData(this);
         nickname = studentData.getNickname();
         pin = null;
 
@@ -120,11 +121,10 @@ public class Level5Activity extends drawerStudentActivity {
         float puntuacion = (float)(correctas*10)/(float)levelArray.length;
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
 
-        SharedPreferences sharedPrefs = getSharedPreferences("eus.ehu.tta.graphiapp." + nickname, Context.MODE_PRIVATE);
-        float puntuacionGuardada = sharedPrefs.getFloat("puntuacionNivel" + String.valueOf(numNivel),-1);
+        float puntuacionGuardada = studentData.getResultado(numNivel);
         if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
         {
-            sharedPrefs.edit().putFloat("puntuacionNivel" + String.valueOf(numNivel),puntuacion).apply();
+            studentData.setResultado(puntuacion,numNivel);
         }
         goBack(null);
     }
