@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="eus.ehu.tta.graphiapp.TrackingActivity"
+    android:columnCount="7"
+    android:id="@+id/trackingLayout">
+    <TextView android:text="@string/resultsName"/>
+    <TextView android:text="@string/resultsL1"/>
+    <TextView android:text="@string/resultsL2"/>
+    <TextView android:text="@string/resultsL3"/>
+    <TextView android:text="@string/resultsL4"/>
+    <TextView android:text="@string/resultsL5"/>
+    <TextView android:text="@string/resultsL8"/>
+
+</GridLayout>

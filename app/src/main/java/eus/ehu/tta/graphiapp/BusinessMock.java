@@ -1,5 +1,7 @@
 package eus.ehu.tta.graphiapp;
 
+import org.json.JSONObject;
+
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
 import eus.ehu.tta.graphiapp.Levels.Nivel2;
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
@@ -110,7 +112,28 @@ public class BusinessMock implements Business {
         };
     }
 
+    @Override
     public Nivel8[] getNivel8(String nickname, Integer pin) {
+        return null;
+    }
+
+    @Override
+    public String registerClass(String tematica, int fecha, String login) {
+        return null;
+    }
+
+    @Override
+    public JSONObject getClasses(String nickname) {
+        return null;
+    }
+
+    @Override
+    public JSONObject getResults(String nickname, String tematica) {
+        return null;
+    }
+
+    @Override
+    public String postLevel1(String correcta, String incorrecta, String nickname) {
         return null;
     }
 }
