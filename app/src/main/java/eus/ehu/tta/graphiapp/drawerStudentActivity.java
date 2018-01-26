@@ -2,6 +2,8 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,6 +30,8 @@ public class drawerStudentActivity extends drawerBaseActivity {
                 Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
                 startActivity(intent);
             }
+            DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
         }
     }
 }
