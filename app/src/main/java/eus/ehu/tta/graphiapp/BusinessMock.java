@@ -156,4 +156,19 @@ public class BusinessMock implements Business {
     public boolean postLevel3(Context context, String correcta, String incorrecta,String remoteURL) {
         return false;
     }
+
+    @Override
+    public boolean postLevel4(Context context, String headline, int iWordPos) {
+        return false;
+    }
+
+    @Override
+    public boolean postLevel5(Context context, String palabra1, String palabra2, String frase1, String frase2) {
+        return false;
+    }
+
+    @Override
+    public boolean postLevel8(Context context, String palabra, int stressType) {
+        return false;
+    }
 }

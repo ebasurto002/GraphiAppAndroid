@@ -29,6 +29,8 @@ public class PostLevel3Activity extends coreActivity {
         boolean result = business.postLevel3(this,correcta,incorrecta,remoteURL);
         if(result == true){
             Toast.makeText(this, R.string.onPostLevel1Success, Toast.LENGTH_SHORT).show();
+            ((EditText)findViewById(R.id.cWordL3)).setText("");
+            ((EditText)findViewById(R.id.cWordL3)).setText("");
         }
         else{
             Toast.makeText(this, R.string.onPostLevel1Fail, Toast.LENGTH_SHORT).show();
