@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 public class PostLevel2Activity extends coreActivity {
 
-    private static final int READ_EXTERNAL_STORAGE_FOR_AUDIO = 0;
+    private static final int EXTERNAL_STORAGE_FOR_AUDIO = 0;
     protected String filename;
     protected static final int AUDIO_REQUEST_CODE = 0;
 
@@ -32,7 +32,8 @@ public class PostLevel2Activity extends coreActivity {
 
 
 
-    public void audioRec(View view){
+    public void audioRec(){
+        filename = ((EditText)findViewById(R.id.unstressedWord)).getText().toString() + ".amr";
         if(!getPackageManager().hasSystemFeature(PackageManager.FEATURE_MICROPHONE)){
             Toast.makeText(this,R.string.no_mic,Toast.LENGTH_SHORT);
         }
@@ -100,7 +101,6 @@ public class PostLevel2Activity extends coreActivity {
             return;
         }
         final Uri uri = data.getData();
-        filename = getFilename(uri);
 
         new ProgressTask<Boolean>(this){
 
@@ -128,17 +128,27 @@ public class PostLevel2Activity extends coreActivity {
 
     }
 
-    private String getFilename(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri,null,null,null,null,null);
-        String displayName = null;
-        try{
-            if(cursor != null && cursor.moveToFirst()){
-                displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+    private boolean checkAncRequestPerms(Context context, Activity activity, String permission, int requestCode){
+        if(ContextCompat.checkSelfPermission(context,permission) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(activity, new String[]{permission},requestCode);
+            return false;
+        }
+        return true;
+    }
+
+    public void onRecAudioClick(View view){
+        if(checkAncRequestPerms(this,this,Manifest.permission.READ_EXTERNAL_STORAGE,EXTERNAL_STORAGE_FOR_AUDIO)){
+            audioRec();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){
+        if(requestCode == EXTERNAL_STORAGE_FOR_AUDIO){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                audioRec();
             }
         }
-        finally{
-            cursor.close();
-        }
-        return displayName;
     }
+
 }

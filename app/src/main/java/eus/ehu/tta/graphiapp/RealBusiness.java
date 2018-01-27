@@ -173,6 +173,7 @@ public class RealBusiness implements Business {
             }
         }
         catch(Exception e){
+            e.printStackTrace();
 
         }
         return false;
@@ -182,7 +183,7 @@ public class RealBusiness implements Business {
     public String postLevel2(String unstressedWord, int stressPos, String filename, String nickname) {
          try{
              JSONObject level2 = new JSONObject();
-             String remoteURL = "http://u017633.ehu.eus:28080/GraphiAppServer/rest/GraphiApp" + "/audio/"+filename;
+             String remoteURL = "http://u017633.ehu.eus:28080/GraphiAppServer/" + "audio/"+filename;
              level2.put("audio",remoteURL);
              level2.put("palabra",unstressedWord);
              level2.put("tildada",stressPos);
