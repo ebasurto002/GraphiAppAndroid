@@ -156,4 +156,9 @@ public class BusinessMock implements Business {
     public boolean postLevel3(Context context, String correcta, String incorrecta,String remoteURL) {
         return false;
     }
+
+    @Override
+    public boolean postLevel4(Context context, String headline, int iWordPos) {
+        return false;
+    }
 }

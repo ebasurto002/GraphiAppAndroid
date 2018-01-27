@@ -33,4 +33,5 @@ public interface Business {
     public abstract Boolean postResults(double [] puntuaciones, int pin, String nickname);
     public abstract boolean uploadFile(Uri uri, Context c, String filename);
     public abstract boolean postLevel3(Context context,String correcta, String incorrecta, String remoteURL);
+    public abstract boolean postLevel4(Context context, String headline, int iWordPos);
 }

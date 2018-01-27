@@ -232,6 +232,40 @@ public class RealBusiness implements Business {
     }
 
     @Override
+    public boolean postLevel4(Context context, String headline, int iWordPos) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHH");
+        String dateString = df.format(calendar.getTime());
+        int fecha = Integer.parseInt(dateString);
+
+        try{
+            JSONObject json = new JSONObject();
+            json.put("titular",headline);
+            json.put("incorrecta",iWordPos);
+            json.put("pin",fecha);
+
+            String jsonArrayString = context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).getString("nivel4",null);
+
+            if(jsonArrayString != null){
+                JSONArray jsonArray = new JSONArray(jsonArrayString);
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel4",jsonArray.toString()).apply();
+            }
+            else{
+                JSONArray jsonArray = new JSONArray();
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel4",jsonArray.toString()).apply();
+            }
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
     public String postLevel2(String unstressedWord, int stressPos, String filename, String nickname) {
          try{
              JSONObject level2 = new JSONObject();
