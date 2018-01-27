@@ -231,8 +231,7 @@ public class Level8Activity extends drawerStudentActivity {
                     int acentuacion = Integer.valueOf(String.valueOf(item.getText()));
                     checkWords(acentuacion,tipoCaja);
                     View view = (View) event.getLocalState();
-                    ViewGroup viewGroup = (ViewGroup) view.getParent();
-                    viewGroup.removeView(view);
+                    view.setVisibility(View.INVISIBLE);
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
