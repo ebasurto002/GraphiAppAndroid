@@ -1,6 +1,9 @@
 package eus.ehu.tta.graphiapp.Levels;
 
-public class Nivel5 {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Nivel5 implements Parcelable {
     private String frase1;
     private String frase2;
     private  String palabra1;
@@ -49,4 +52,36 @@ public class Nivel5 {
     public void setPalabra2(String palabra2) {
         this.palabra2 = palabra2;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.frase1);
+        dest.writeString(this.frase2);
+        dest.writeString(this.palabra1);
+        dest.writeString(this.palabra2);
+    }
+
+    protected Nivel5(Parcel in) {
+        this.frase1 = in.readString();
+        this.frase2 = in.readString();
+        this.palabra1 = in.readString();
+        this.palabra2 = in.readString();
+    }
+
+    public static final Parcelable.Creator<Nivel5> CREATOR = new Parcelable.Creator<Nivel5>() {
+        @Override
+        public Nivel5 createFromParcel(Parcel source) {
+            return new Nivel5(source);
+        }
+
+        @Override
+        public Nivel5[] newArray(int size) {
+            return new Nivel5[size];
+        }
+    };
 }

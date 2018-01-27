@@ -2,10 +2,8 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +11,13 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import eus.ehu.tta.graphiapp.Levels.Nivel2;
 
 public class Level2Activity extends drawerStudentActivity {
 
+    private static final String INDEX = "index";
+    private static final String CORRECTAS = "correctas";
+    private static final String LEVELARRAY = "levelArray";
     private int index;
     private int correctas;
     private Nivel2[] levelArray;
@@ -38,7 +38,7 @@ public class Level2Activity extends drawerStudentActivity {
         Intent intent = getIntent();
         int pinExtra = intent.getIntExtra("pin",-1);
         if (pinExtra == -1) {
-            pin = null;;
+            pin = null;
         }
         else
         {
@@ -47,10 +47,30 @@ public class Level2Activity extends drawerStudentActivity {
             button.setEnabled(false);
             puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
         }
-        index=0;
-        correctas=0;
 
-        new getLevelTask(this).execute();
+        if (savedInstanceState == null)
+        {
+            index = 0;
+            correctas = 0;
+            new getLevelTask(this).execute();
+        }
+
+        else
+        {
+            index = savedInstanceState.getInt(INDEX);
+            correctas = savedInstanceState.getInt(CORRECTAS);;
+            levelArray = (Nivel2[]) savedInstanceState.getParcelableArray(LEVELARRAY);
+            setButtons();
+            Button button = findViewById(R.id.level2HearAudio);
+            button.setEnabled(true);
+        }
+    }
+
+    public void onSaveInstanceState (Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(INDEX,index);
+        savedInstanceState.putInt(CORRECTAS,correctas);
+        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
     }
 
     private void setButtons() {

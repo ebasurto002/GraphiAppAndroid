@@ -2,11 +2,8 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -17,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +21,9 @@ import eus.ehu.tta.graphiapp.Levels.Nivel4;
 
 public class Level4Activity extends drawerStudentActivity {
 
+    private static final String INDEX = "index";
+    private static final String CORRECTAS = "correctas";
+    private static final String LEVELARRAY = "levelArray";
     private static final String TAG = "Level4Activity";
     private int index;
     private int correctas;
@@ -56,10 +55,27 @@ public class Level4Activity extends drawerStudentActivity {
             puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
         }
 
-        index = 0;
-        correctas = 0;
+        if (savedInstanceState == null)
+        {
+            index = 0;
+            correctas = 0;
+            new getLevelTask(this).execute();
+        }
 
-        new getLevelTask(this).execute();
+        else
+        {
+            index = savedInstanceState.getInt(INDEX);
+            correctas = savedInstanceState.getInt(CORRECTAS);;
+            levelArray = (Nivel4[]) savedInstanceState.getParcelableArray(LEVELARRAY);
+            setNewspaperHeader();
+        }
+    }
+
+    public void onSaveInstanceState (Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(INDEX,index);
+        savedInstanceState.putInt(CORRECTAS,correctas);
+        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
     }
 
     private void setNewspaperHeader() {

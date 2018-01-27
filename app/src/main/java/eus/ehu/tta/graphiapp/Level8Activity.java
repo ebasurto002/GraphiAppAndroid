@@ -17,15 +17,22 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Arrays;
+
 import eus.ehu.tta.graphiapp.Levels.Nivel8;
 
 public class Level8Activity extends drawerStudentActivity {
 
+    private static final String INDEX = "index";
+    private static final String CORRECTAS = "correctas";
+    private static final String LEVELARRAY = "levelArray";
+    private static final String ISWORDVISIBLE = "isWordVisible";
     private int index;
     private int correctas;
     private Nivel8[] levelArray;
@@ -33,6 +40,7 @@ public class Level8Activity extends drawerStudentActivity {
     private Integer pin;
     StudentData studentData;
     double [] puntuacionesArray;
+    boolean [] isWordVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +64,39 @@ public class Level8Activity extends drawerStudentActivity {
             puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
         }
 
-        index=0;
-        correctas=0;
+        if (savedInstanceState == null)
+        {
+            index=0;
+            correctas=0;
+            new getLevelTask(this).execute();
+        }
 
-        new getLevelTask(this).execute();
+        else
+        {
+            index = savedInstanceState.getInt(INDEX);
+            correctas = savedInstanceState.getInt(CORRECTAS);;
+            levelArray = (Nivel8[]) savedInstanceState.getParcelableArray(LEVELARRAY);
+            isWordVisible = savedInstanceState.getBooleanArray(ISWORDVISIBLE);
+            setViews();
+        }
+    }
+
+    public void onSaveInstanceState (Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(INDEX,index);
+        savedInstanceState.putInt(CORRECTAS,correctas);
+        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
+
+        GridLayout grid = findViewById(R.id.level8Grid);
+        for (int i = 0; i < levelArray.length; i++)
+        {
+            View view = grid.getChildAt(i);
+            if (view.getVisibility() == View.INVISIBLE)
+            {
+                isWordVisible[i] = false;
+            }
+        }
+        savedInstanceState.putBooleanArray(ISWORDVISIBLE,isWordVisible);
     }
 
     private void setViews() {
@@ -76,6 +113,10 @@ public class Level8Activity extends drawerStudentActivity {
             params.width = 100;
             textView.setLayoutParams(params);
             textView.setOnLongClickListener(new myLongClickListener(textView,levelArray[i].getAcento()));
+            if (!isWordVisible[i])
+            {
+                textView.setVisibility(View.INVISIBLE);
+            }
             grid.addView(textView);
         }
 
@@ -140,6 +181,8 @@ public class Level8Activity extends drawerStudentActivity {
         protected void onFinish(Nivel8[] result) {
             levelArray = result;
             if (levelArray != null) {
+                isWordVisible = new boolean [levelArray.length];
+                Arrays.fill(isWordVisible,true);
                 setViews();
             }
             else

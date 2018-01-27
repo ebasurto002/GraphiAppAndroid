@@ -2,8 +2,6 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +16,9 @@ import eus.ehu.tta.graphiapp.Levels.Nivel3;
 
 public class Level3Activity extends drawerStudentActivity {
 
+    private static final String INDEX = "index";
+    private static final String CORRECTAS = "correctas";
+    private static final String LEVELARRAY = "levelArray";
     private int index;
     private int correctas;
     private Nivel3[] levelArray;
@@ -48,10 +49,37 @@ public class Level3Activity extends drawerStudentActivity {
             puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
         }
 
-        index=0;
-        correctas=0;
+        if (savedInstanceState == null)
+        {
+            index=0;
+            correctas=0;
+            new getLevelTask(this).execute();
+        }
 
-        new getLevelTask(this).execute();
+        else
+        {
+            index = savedInstanceState.getInt(INDEX);
+            correctas = savedInstanceState.getInt(CORRECTAS);;
+            levelArray = (Nivel3[]) savedInstanceState.getParcelableArray(LEVELARRAY);
+            setViews();
+            setButtons();
+        }
+    }
+
+    private void setButtons() {
+        Button button1 = findViewById(R.id.level3Word1);
+        button1.setEnabled(true);
+        button1.setOnClickListener(new ButtonOnClickListener(1));
+        Button button2 = findViewById(R.id.level3Word2);
+        button2.setOnClickListener(new ButtonOnClickListener(2));
+        button2.setEnabled(true);
+    }
+
+    public void onSaveInstanceState (Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(INDEX,index);
+        savedInstanceState.putInt(CORRECTAS,correctas);
+        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
     }
 
     private void setViews() {
@@ -132,12 +160,7 @@ public class Level3Activity extends drawerStudentActivity {
             levelArray = result;
             if (levelArray != null) {
                 setViews();
-                Button button1 = findViewById(R.id.level3Word1);
-                button1.setEnabled(true);
-                button1.setOnClickListener(new ButtonOnClickListener(1));
-                Button button2 = findViewById(R.id.level3Word2);
-                button2.setOnClickListener(new ButtonOnClickListener(2));
-                button2.setEnabled(true);
+                setButtons();
             }
             else
             {

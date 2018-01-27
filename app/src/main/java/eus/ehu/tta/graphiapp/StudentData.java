@@ -2,7 +2,6 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 
 public class StudentData {
     private Context context;

@@ -2,7 +2,6 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,9 @@ import eus.ehu.tta.graphiapp.Levels.Nivel1;
 
 public class Level1Activity extends drawerStudentActivity {
 
+    private static final String INDEX = "index";
+    private static final String CORRECTAS = "correctas";
+    private static final String LEVELARRAY = "levelArray";
     private int index;
     private int correctas;
     private Nivel1[] levelArray;
@@ -44,15 +46,35 @@ public class Level1Activity extends drawerStudentActivity {
             puntuacionesArray = new double[6];
         }
 
-        index=0;
-        correctas=0;
-
         Button button1 = findViewById(R.id.level1word1);
         Button button2 = findViewById(R.id.level1word2);
+
+        if (savedInstanceState == null) {
+
+            index = 0;
+            correctas = 0;
+            new getLevelTask(this).execute();
+        }
+
+        else
+        {
+            index = savedInstanceState.getInt(INDEX);
+            correctas = savedInstanceState.getInt(CORRECTAS);;
+            levelArray = (Nivel1 []) savedInstanceState.getParcelableArray(LEVELARRAY);
+            button1.setEnabled(true);
+            button2.setEnabled(true);
+            setTextButtons();
+        }
+
         button1.setOnClickListener(new buttonOnClickListener(1));
         button2.setOnClickListener(new buttonOnClickListener(2));
+    }
 
-        new getLevelTask(this).execute();
+    public void onSaveInstanceState (Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(INDEX,index);
+        savedInstanceState.putInt(CORRECTAS,correctas);
+        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
     }
 
     private void setTextButtons() {

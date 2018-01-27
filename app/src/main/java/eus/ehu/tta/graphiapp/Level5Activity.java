@@ -2,7 +2,6 @@ package eus.ehu.tta.graphiapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +11,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
-
 import eus.ehu.tta.graphiapp.Levels.Nivel5;
 
 public class Level5Activity extends drawerStudentActivity {
 
+    private static final String INDEX = "index";
+    private static final String CORRECTAS = "correctas";
+    private static final String LEVELARRAY = "levelArray";
+    private static final String ORDER = "order";
     private int index;
     private int correctas;
     private Nivel5[] levelArray;
@@ -25,6 +26,7 @@ public class Level5Activity extends drawerStudentActivity {
     private Integer pin;
     StudentData studentData;
     double [] puntuacionesArray;
+    private int order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +50,37 @@ public class Level5Activity extends drawerStudentActivity {
             puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
         }
 
-        index=0;
-        correctas=0;
+        if (savedInstanceState == null)
+        {
+            index=0;
+            correctas=0;
+            new getLevelTask(this).execute();
+        }
 
-        new getLevelTask(this).execute();
+        else
+        {
+            index = savedInstanceState.getInt(INDEX);
+            correctas = savedInstanceState.getInt(CORRECTAS);;
+            levelArray = (Nivel5[]) savedInstanceState.getParcelableArray(LEVELARRAY);
+            order = savedInstanceState.getInt(ORDER);
+            setViews();
+            Button confirmButton = findViewById(R.id.level5ConfirmButton);
+            confirmButton.setEnabled(true);
+        }
+    }
+
+    public void onSaveInstanceState (Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(INDEX,index);
+        savedInstanceState.putInt(CORRECTAS,correctas);
+        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
+        savedInstanceState.putInt(ORDER,order);
     }
 
     private void setViews() {
         TextView word1View = findViewById(R.id.level5Word1);
         TextView word2View = findViewById(R.id.level5Word2);
-        if (Math.random()<0.5) {
+        if (order<0.5) {
             word1View.setText(levelArray[index].getPalabra1());
             word2View.setText(levelArray[index].getPalabra2());
         }
@@ -79,7 +102,12 @@ public class Level5Activity extends drawerStudentActivity {
         textViewSentence2Part1.setText(sentence2split[0]);
         TextView textViewSentence2Part2 = findViewById(R.id.level5Sentence2Part2);
         textViewSentence2Part2.setText(sentence2split[1]);
+    }
 
+    private void changeViews ()
+    {
+        order = (int) Math.round(Math.random());
+        setViews();
         ((EditText) findViewById(R.id.level5EditText1)).setText("");
         ((EditText) findViewById(R.id.level5EditText2)).setText("");
     }
@@ -125,7 +153,7 @@ public class Level5Activity extends drawerStudentActivity {
 
         else
         {
-            setViews();
+            changeViews();
         }
     }
 
@@ -167,6 +195,7 @@ public class Level5Activity extends drawerStudentActivity {
         protected void onFinish(Nivel5[] result) {
             levelArray = result;
             if (levelArray != null) {
+                order = (int) Math.round(Math.random());
                 setViews();
                 Button confirmButton = findViewById(R.id.level5ConfirmButton);
                 confirmButton.setEnabled(true);

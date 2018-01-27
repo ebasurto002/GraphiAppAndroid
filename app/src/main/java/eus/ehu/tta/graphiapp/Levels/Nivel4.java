@@ -1,6 +1,9 @@
 package eus.ehu.tta.graphiapp.Levels;
 
-public class Nivel4 {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Nivel4 implements Parcelable {
     private String titular;
     private int incorrecta;
 
@@ -29,4 +32,32 @@ public class Nivel4 {
     public void setIncorrecta(int incorrecta) {
         this.incorrecta = incorrecta;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.titular);
+        dest.writeInt(this.incorrecta);
+    }
+
+    protected Nivel4(Parcel in) {
+        this.titular = in.readString();
+        this.incorrecta = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Nivel4> CREATOR = new Parcelable.Creator<Nivel4>() {
+        @Override
+        public Nivel4 createFromParcel(Parcel source) {
+            return new Nivel4(source);
+        }
+
+        @Override
+        public Nivel4[] newArray(int size) {
+            return new Nivel4[size];
+        }
+    };
 }
