@@ -3,6 +3,7 @@
     package="eus.ehu.tta.graphiapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -15,16 +16,10 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/registerLabel">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".userHomeActivity"
-            android:label="@string/userHomeLabel">
-        </activity>
+            android:label="@string/userHomeLabel"></activity>
         <activity
             android:name=".applicationHelpActivity"
             android:label="@string/applicationHelpLabel" />
@@ -66,9 +61,12 @@
         <activity android:name=".PostLevel4Activity" />
         <activity android:name=".PostLevel5Activity" />
         <activity android:name=".PostLevel8Activity" />
-        <activity android:name=".TrackingActivity"></activity>
-        <activity android:name=".ProfileActivity"></activity>
-        <activity android:name=".VirtualClassActivity" android:label="Clase Virtual" />
+        <activity android:name=".TrackingActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity
+            android:name=".VirtualClassActivity"
+            android:label="Clase Virtual" />
+
         <provider
             android:name=".GenericFileProvider"
             android:authorities="${applicationId}.eus.ehu.tta.ttaejemplo.provider"
@@ -76,8 +74,16 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".LauncherActivity" android:label="GraphiApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
