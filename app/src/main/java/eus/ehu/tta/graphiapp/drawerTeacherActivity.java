@@ -1,6 +1,11 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,7 +26,14 @@ public class drawerTeacherActivity extends drawerBaseActivity {
     private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Toast.makeText(drawerTeacherActivity.this,String.valueOf(i), Toast.LENGTH_SHORT).show();
+
+            SharedPreferences defaultSP = getSharedPreferences("eus.ehu.tta.graphiapp.default", Context.MODE_PRIVATE);
+            defaultSP.edit().putString("currentNickname",null).apply();
+            defaultSP.edit().putBoolean("isTeacher", false).apply();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
         }
     }
 }

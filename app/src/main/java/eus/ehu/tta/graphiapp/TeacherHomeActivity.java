@@ -73,7 +73,7 @@ public class TeacherHomeActivity extends drawerTeacherActivity {
         EditText className = (EditText) findViewById(R.id.className);
         final String name = className.getText().toString();
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("ddMMyyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHH");
         String dateString = df.format(calendar.getTime());
         Toast.makeText(this, dateString, Toast.LENGTH_LONG); //De momento, para pruebas del formato de fecha
         final int date = Integer.parseInt(dateString);

@@ -1,6 +1,8 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,18 +12,27 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        StudentData studentData = new StudentData(this);
+        SharedPreferences defaultSP = getSharedPreferences("eus.ehu.tta.graphiapp.default", Context.MODE_PRIVATE);
 
-        if (studentData.getNickname() != null)
-        {
-            Intent intent = new Intent(this, userHomeActivity.class);
+        if(defaultSP.getBoolean("isTeacher",false)){
+            TeacherData.getInstance().setLogin(defaultSP.getString("currentNickname",null));
+            Intent intent = new Intent(this, TeacherHomeActivity.class);
             startActivity(intent);
         }
+        else{
+            StudentData studentData = new StudentData(this);
 
-        else
-        {
-            Intent intent = new Intent(this, RegisterActivity.class);
-            startActivity(intent);
+            if (studentData.getNickname() != null)
+            {
+                Intent intent = new Intent(this, userHomeActivity.class);
+                startActivity(intent);
+            }
+
+            else
+            {
+                Intent intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }

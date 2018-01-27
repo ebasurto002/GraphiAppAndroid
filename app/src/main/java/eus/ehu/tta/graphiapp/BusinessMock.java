@@ -151,4 +151,9 @@ public class BusinessMock implements Business {
     public boolean uploadFile(Uri uri, Context c, String filename) {
         return false;
     }
+
+    @Override
+    public boolean postLevel3(Context context, String correcta, String incorrecta,String remoteURL) {
+        return false;
+    }
 }

@@ -72,7 +72,7 @@ public class RestClient {
         String fileType;
 
         if(fileName.contains("jpg")|| fileName.contains("png")||fileName.contains("gif")){
-            fileType="image";
+            fileType="img";
         }
         else{
             fileType="audio";
