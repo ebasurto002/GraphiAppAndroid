@@ -423,6 +423,7 @@ public class RealBusiness implements Business {
         String[] fileNameSplit = path.split("\\.");
         String levelName = fileNameSplit[0];
         JSONArray array = jsonObject.getJSONArray(levelName);
+        array = addToJSONArrayFromSharedPreferences(array,levelName);
         JSONArray newArray = new JSONArray();
         if (pin==null) {
             if (array.length()<=10)
@@ -450,6 +451,23 @@ public class RealBusiness implements Business {
         JSONObject newJSONObject = new JSONObject();
         newJSONObject.put(levelName,newArray);
         return newJSONObject;
+    }
+
+    private JSONArray addToJSONArrayFromSharedPreferences(JSONArray array, String levelName) {
+        String jsonArrayString = context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).getString(levelName,null);
+        if (jsonArrayString != null)
+        {
+            try {
+                JSONArray jsonArray = new JSONArray(jsonArrayString);
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    array.put(jsonArray.get(i));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return array;
     }
 
     @Override
