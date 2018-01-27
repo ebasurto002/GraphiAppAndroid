@@ -1,6 +1,8 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +53,9 @@ public class LoginActivity extends coreActivity {
                         Intent intent = new Intent(LoginActivity.this,TeacherHomeActivity.class);
                         TeacherData td = TeacherData.getInstance();
                         td.setLogin(login);
+                        SharedPreferences defaultSP = getSharedPreferences("eus.ehu.tta.graphiapp.default", Context.MODE_PRIVATE);
+                        defaultSP.edit().putString("currentNickname",login).apply();
+                        defaultSP.edit().putBoolean("isTeacher",true);
                         intent.putExtra(TeacherHomeActivity.EXTRA_LOGIN, login);
                         startActivity(intent);
                     }

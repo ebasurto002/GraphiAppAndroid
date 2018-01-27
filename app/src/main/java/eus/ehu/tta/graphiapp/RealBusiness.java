@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Random;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
@@ -181,6 +183,55 @@ public class RealBusiness implements Business {
     }
 
     @Override
+    public boolean postLevel3(Context context, String correcta, String incorrecta, String remoteURL) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHH");
+        String dateString = df.format(calendar.getTime());
+        int fecha = Integer.parseInt(dateString);
+        Random rdn = new Random();
+        int order = rdn.nextInt(2) + 1;
+
+        try{
+            JSONObject json = new JSONObject();
+            if(order == 1){
+                json.put("palabra1",correcta);
+                json.put("palabra2",incorrecta);
+                json.put("correcta",order);
+                json.put("urlImagen",remoteURL);
+                json.put("pin",fecha);
+            }
+            else{
+                json.put("palabra1",incorrecta);
+                json.put("palabra2",correcta);
+                json.put("correcta",order);
+                json.put("urlImagen",remoteURL);
+                json.put("pin",fecha);
+            }
+
+            String jsonArrayString = context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).getString("nivel3",null);
+
+            if(jsonArrayString != null){
+                JSONArray jsonArray = new JSONArray(jsonArrayString);
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel3",jsonArray.toString()).apply();
+            }
+            else{
+                JSONArray jsonArray = new JSONArray();
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel3",jsonArray.toString()).apply();
+            }
+            return true;
+
+        }
+         catch(Exception e){
+            e.printStackTrace();
+         }
+
+         return false;
+
+    }
+
+    @Override
     public String postLevel2(String unstressedWord, int stressPos, String filename, String nickname) {
          try{
              JSONObject level2 = new JSONObject();
@@ -188,6 +239,7 @@ public class RealBusiness implements Business {
              level2.put("audio",remoteURL);
              level2.put("palabra",unstressedWord);
              level2.put("tildada",stressPos);
+             level2.put("clase",TeacherData.getInstance().getIdClase());
 
              JSONObject json = new JSONObject();
              json.put("nivel2JSON",level2);
