@@ -1,19 +1,18 @@
 package eus.ehu.tta.graphiapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class MainActivity extends coreActivity {
+public class RegisterActivity extends coreActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_register);
     }
 
     public void goToLogin(View view){
@@ -53,19 +52,19 @@ public class MainActivity extends coreActivity {
                         String showNickname = getResources().getString(R.string.registerCompleted);
                         showNickname = showNickname.concat(" " + result);
 
-                        Toast.makeText(MainActivity.this,showNickname, Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this,showNickname, Toast.LENGTH_LONG).show();
                         nombreEditText.setText("");
                         apellidoEditText.setText("");
                         passwordEditText.setText("");
                         RadioGroup rg = (RadioGroup)findViewById(R.id.loginRadioGroup);
                         rg.clearCheck();
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
 
                     else
                     {
-                        Toast.makeText(MainActivity.this,R.string.registerError, Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this,R.string.registerError, Toast.LENGTH_LONG).show();
                     }
                 }
             }.execute();

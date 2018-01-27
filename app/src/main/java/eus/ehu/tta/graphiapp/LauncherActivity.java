@@ -1,7 +1,6 @@
 package eus.ehu.tta.graphiapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -21,7 +20,7 @@ public class LauncherActivity extends AppCompatActivity {
 
         else
         {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         }
     }
