@@ -55,7 +55,7 @@ public class LoginActivity extends coreActivity {
                         td.setLogin(login);
                         SharedPreferences defaultSP = getSharedPreferences("eus.ehu.tta.graphiapp.default", Context.MODE_PRIVATE);
                         defaultSP.edit().putString("currentNickname",login).apply();
-                        defaultSP.edit().putBoolean("isTeacher",true);
+                        defaultSP.edit().putBoolean("isTeacher",true).apply();
                         intent.putExtra(TeacherHomeActivity.EXTRA_LOGIN, login);
                         startActivity(intent);
                     }
