@@ -34,4 +34,6 @@ public interface Business {
     public abstract boolean uploadFile(Uri uri, Context c, String filename);
     public abstract boolean postLevel3(Context context,String correcta, String incorrecta, String remoteURL);
     public abstract boolean postLevel4(Context context, String headline, int iWordPos);
+    public abstract boolean postLevel5(Context context, String palabra1, String palabra2, String frase1, String frase2);
+    public abstract boolean postLevel8(Context context,String palabra, int stressType);
 }

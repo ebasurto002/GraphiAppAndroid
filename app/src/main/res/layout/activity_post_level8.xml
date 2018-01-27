@@ -23,14 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RadioButton
+            android:id="@+id/idAguda"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/acuteStress"/>
         <RadioButton
+            android:id="@+id/idLlana"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/plainStress"/>
         <RadioButton
+            android:id="@+id/idEsdrujula"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/graveStress"/>
@@ -38,7 +41,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/addExercise"/>
+        android:text="@string/addExercise"
+        android:onClick="addL8Exercise"/>
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

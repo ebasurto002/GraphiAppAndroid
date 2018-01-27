@@ -266,6 +266,72 @@ public class RealBusiness implements Business {
     }
 
     @Override
+    public boolean postLevel5(Context context, String palabra1, String palabra2, String frase1, String frase2) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHH");
+        String dateString = df.format(calendar.getTime());
+        int fecha = Integer.parseInt(dateString);
+        try{
+            JSONObject json = new JSONObject();
+            json.put("palabra1",palabra1);
+            json.put("palabra2",palabra2);
+            json.put("frase1",frase1);
+            json.put("frase2",frase2);
+            json.put("pin",fecha);
+
+            String jsonArrayString = context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).getString("nivel5",null);
+
+            if(jsonArrayString != null){
+                JSONArray jsonArray = new JSONArray(jsonArrayString);
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel5",jsonArray.toString()).apply();
+            }
+            else{
+                JSONArray jsonArray = new JSONArray();
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel5",jsonArray.toString()).apply();
+            }
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean postLevel8(Context context, String palabra, int stressType) {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHH");
+        String dateString = df.format(calendar.getTime());
+        int fecha = Integer.parseInt(dateString);
+        try{
+            JSONObject json =  new JSONObject();
+            json.put("palabra",palabra);
+            json.put("acento",stressType);
+            json.put("pin",fecha);
+
+            String jsonArrayString  = context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).getString("nivel8",null);
+
+            if(jsonArrayString != null){
+                JSONArray jsonArray = new JSONArray(jsonArrayString);
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel8",jsonArray.toString()).apply();
+            }
+            else{
+                JSONArray jsonArray = new JSONArray();
+                jsonArray.put(json);
+                context.getSharedPreferences("eus.ehu.tta.graphiapp.default",Context.MODE_PRIVATE).edit().putString("nivel8",jsonArray.toString()).apply();
+            }
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
     public String postLevel2(String unstressedWord, int stressPos, String filename, String nickname) {
          try{
              JSONObject level2 = new JSONObject();
