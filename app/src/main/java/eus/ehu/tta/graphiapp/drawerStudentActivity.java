@@ -30,6 +30,13 @@ public class drawerStudentActivity extends drawerBaseActivity {
                 Intent intent = new Intent(getApplicationContext(),ProfileActivity.class);
                 startActivity(intent);
             }
+            else if (i == 1)
+            {
+                StudentData studentData = new StudentData(getApplicationContext());
+                studentData.setNickname(null);
+                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
+            }
             DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
             mDrawerLayout.closeDrawer(Gravity.LEFT);
         }
