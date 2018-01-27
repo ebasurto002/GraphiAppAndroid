@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class Level8Activity extends drawerStudentActivity {
     private String nickname;
     private Integer pin;
     StudentData studentData;
+    double [] puntuacionesArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,18 @@ public class Level8Activity extends drawerStudentActivity {
 
         studentData = new StudentData(this);
         nickname = studentData.getNickname();
-        pin = null;
+        Intent intent = getIntent();
+        int pinExtra = intent.getIntExtra("pin",-1);
+        if (pinExtra == -1) {
+            pin = null;
+        }
+        else
+        {
+            pin = pinExtra;
+            Button button = findViewById(R.id.level8BackButton);
+            button.setEnabled(false);
+            puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
+        }
 
         index=0;
         correctas=0;
@@ -97,11 +110,18 @@ public class Level8Activity extends drawerStudentActivity {
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
 
         float puntuacionGuardada = studentData.getResultado(numNivel);
-        if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
-        {
-            studentData.setResultado(puntuacion,numNivel);
+        if (pin == null) {
+            if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
+            {
+                studentData.setResultado(puntuacion, numNivel);
+            }
+            goBack(null);
         }
-        goBack(null);
+        else
+        {
+            puntuacionesArray[5] = puntuacion;
+            new uploadResultsServerTask (this).execute();
+        }
     }
 
     private class getLevelTask extends ProgressTask<Nivel8[]>
@@ -224,6 +244,32 @@ public class Level8Activity extends drawerStudentActivity {
             }
 
             return false;
+        }
+    }
+
+    private class uploadResultsServerTask extends ProgressTask <Boolean> {
+        public uploadResultsServerTask(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected Boolean work() throws Exception {
+            return business.postResults(puntuacionesArray,pin,nickname);
+        }
+
+        @Override
+        protected void onFinish(Boolean result) {
+            if (result)
+            {
+                Toast.makeText(Level8Activity.this, "Se han subido las puntuaciones correctamente al servidor",Toast.LENGTH_SHORT).show();
+            }
+
+            else
+            {
+                Toast.makeText(Level8Activity.this, "No se han subido las puntuaciones correctamente al servidor",Toast.LENGTH_SHORT).show();
+            }
+            Intent intent = new Intent(Level8Activity.this,VirtualClassActivity.class);
+            startActivity(intent);
         }
     }
 }

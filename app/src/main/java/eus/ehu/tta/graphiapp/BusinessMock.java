@@ -136,4 +136,9 @@ public class BusinessMock implements Business {
     public String postLevel1(String correcta, String incorrecta, String nickname) {
         return null;
     }
+
+    @Override
+    public Boolean postResults(double[] puntuaciones, int pin, String nickname) {
+        return null;
+    }
 }

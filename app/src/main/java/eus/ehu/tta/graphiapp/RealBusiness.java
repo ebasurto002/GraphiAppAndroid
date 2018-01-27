@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.util.Random;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
@@ -158,6 +159,7 @@ public class RealBusiness implements Business {
         return null;
     }
 
+
     @Override
     public Nivel1[] getNivel1(String nickname, Integer pin) {
         Nivel1[] nivel1Array = null;
@@ -293,7 +295,7 @@ public class RealBusiness implements Business {
         String completePath = String.format(path+"?nickname=%s",nickname);
         if (pin!=null)
         {
-            completePath.concat(String.format("&&pin=%d",pin.intValue()));
+            completePath = completePath.concat(String.format("&&pin=%d",pin.intValue()));
         }
         return completePath;
     }
@@ -352,5 +354,30 @@ public class RealBusiness implements Business {
         JSONObject newJSONObject = new JSONObject();
         newJSONObject.put(levelName,newArray);
         return newJSONObject;
+    }
+
+    @Override
+    public Boolean postResults(double[] puntuaciones, int pin, String nickname) {
+        boolean result = false;
+        JSONObject json = new JSONObject();
+        try {
+            json.put("puntosNivel1", puntuaciones[0]);
+            json.put("puntosNivel2", puntuaciones[1]);
+            json.put("puntosNivel3", puntuaciones[2]);
+            json.put("puntosNivel4", puntuaciones[3]);
+            json.put("puntosNivel5", puntuaciones[4]);
+            json.put("puntosNivel8", puntuaciones[5]);
+            json.put("fecha",pin);
+            json.put("alumno",nickname);
+            int code = restClient.postJson(json, "postResult");
+            if (code == HttpURLConnection.HTTP_OK) {
+                result = true;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

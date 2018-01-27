@@ -26,4 +26,5 @@ public interface Business {
     public abstract JSONObject getClasses(String nickname);
     public abstract JSONObject getResults(String nickname, String tematica);
     public abstract String postLevel1(String correcta, String incorrecta, String nickname);
+    public abstract Boolean postResults(double [] puntuaciones, int pin, String nickname);
 }

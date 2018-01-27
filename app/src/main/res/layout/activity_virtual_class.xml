@@ -5,24 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="eus.ehu.tta.graphiapp.Level1Activity">
+    tools:context="eus.ehu.tta.graphiapp.VirtualClassActivity">
 
-    <Button
-        android:id="@+id/level1word1"
+    <EditText
+        android:id="@+id/claseVirtualPinEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"/>
-
+        android:hint="@string/putPin"/>
     <Button
-        android:id="@+id/level1word2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:enabled="false"/>
-
+        android:onClick="startVirtualClass"
+        android:text="@string/begin"/>
     <Button
-        android:id="@+id/level1BackButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:onClick="goBack" />
+        android:onClick="goBack"
+        android:text="@string/back"/>
+
 </LinearLayout>

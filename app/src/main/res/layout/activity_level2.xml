@@ -19,6 +19,7 @@
         android:enabled="false"
         android:onClick="playAudio"/>
     <Button
+        android:id="@+id/level2BackButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/back"

@@ -26,4 +26,10 @@ public class GameModesActivity extends drawerStudentActivity {
         Intent intent = new Intent(this,IndividualModeActivity.class);
         startActivity(intent);
     }
+
+    public void virtualMode (View view)
+    {
+        Intent intent = new Intent(this,VirtualClassActivity.class);
+        startActivity(intent);
+    }
 }

@@ -32,6 +32,7 @@ public class Level4Activity extends drawerStudentActivity {
     private String nickname;
     private Integer pin;
     StudentData studentData;
+    double [] puntuacionesArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,18 @@ public class Level4Activity extends drawerStudentActivity {
 
         studentData = new StudentData(this);
         nickname = studentData.getNickname();
-        pin = null;
+        Intent intent = getIntent();
+        int pinExtra = intent.getIntExtra("pin",-1);
+        if (pinExtra == -1) {
+            pin = null;
+        }
+        else
+        {
+            pin = pinExtra;
+            Button button = findViewById(R.id.level4BackButton);
+            button.setEnabled(false);
+            puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
+        }
 
         index = 0;
         correctas = 0;
@@ -109,11 +121,21 @@ public class Level4Activity extends drawerStudentActivity {
         Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
 
         float puntuacionGuardada = studentData.getResultado(numNivel);
-        if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
-        {
-            studentData.setResultado(puntuacion,numNivel);
+        if (pin == null) {
+            if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
+            {
+                studentData.setResultado(puntuacion, numNivel);
+            }
+            goBack(null);
         }
-        goBack(null);
+        else
+        {
+            puntuacionesArray[3] = puntuacion;
+            Intent intent = new Intent(this,Level5Activity.class);
+            intent.putExtra("pin",pin);
+            intent.putExtra("puntuacionesArray",puntuacionesArray);
+            startActivity(intent);
+        }
     }
 
     private class getLevelTask extends ProgressTask<Nivel4[]>
