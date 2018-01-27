@@ -77,7 +77,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".LauncherActivity" android:label="GraphiApp">
+        <activity android:name=".LauncherActivity" android:label="GraphiApp" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
