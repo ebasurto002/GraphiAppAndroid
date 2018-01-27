@@ -43,17 +43,18 @@ public class LoginActivity extends coreActivity {
             @Override
             protected void onFinish(Boolean result){
                 if(result.booleanValue() == true){
+                    SharedPreferences defaultSP = getSharedPreferences("eus.ehu.tta.graphiapp.default", Context.MODE_PRIVATE);
                     if(uType==Business.TIPO_ALUMNO){
                         Intent intent = new Intent(LoginActivity.this,userHomeActivity.class);
                         StudentData studentData = new StudentData(LoginActivity.this);
                         studentData.setNickname(login);
+                        defaultSP.edit().putBoolean("isTeacher",false).apply();
                         startActivity(intent);
                     }
                     else{
                         Intent intent = new Intent(LoginActivity.this,TeacherHomeActivity.class);
                         TeacherData td = TeacherData.getInstance();
                         td.setLogin(login);
-                        SharedPreferences defaultSP = getSharedPreferences("eus.ehu.tta.graphiapp.default", Context.MODE_PRIVATE);
                         defaultSP.edit().putString("currentNickname",login).apply();
                         defaultSP.edit().putBoolean("isTeacher",true).apply();
                         intent.putExtra(TeacherHomeActivity.EXTRA_LOGIN, login);
