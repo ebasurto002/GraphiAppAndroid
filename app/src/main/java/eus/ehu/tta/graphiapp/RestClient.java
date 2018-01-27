@@ -69,6 +69,14 @@ public class RestClient {
         String boundary = Long.toString(System.currentTimeMillis());
         String newLine = "\r\n";
         String prefix = "--";
+        String fileType;
+
+        if(fileName.contains("jpg")|| fileName.contains("png")||fileName.contains("gif")){
+            fileType="image";
+        }
+        else{
+            fileType="audio";
+        }
 
         HttpURLConnection c = null;
         try{
@@ -77,7 +85,14 @@ public class RestClient {
             c.setDoOutput(true);
             DataOutputStream out = new DataOutputStream(c.getOutputStream());
             out.writeBytes(prefix+boundary+newLine);
+            out.writeBytes("Content-Disposition: form-data; name=\"filetype\"");
+            out.writeBytes(newLine);
+            out.writeBytes(newLine);
+            out.writeBytes(fileType);
+            out.writeBytes(newLine);
+            out.writeBytes(prefix+boundary+newLine);
             out.writeBytes("Content-Disposition: form-data; name=\"file\"; filename=\"" + fileName + "\"" + newLine);
+            out.writeBytes("Content-Type: multipart/form-data" + newLine);
             out.writeBytes(newLine);
             byte[] data = new byte[1024 * 1024];
             int len;

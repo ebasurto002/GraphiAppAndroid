@@ -25,11 +25,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/audioRec"/>
+        android:text="@string/audioRec"
+        android:onClick="onRecAudioClick"/>
     <Button
+        android:id="@+id/l2AddBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/addExercise"/>
+        android:text="@string/addExercise"
+        android:onClick="addL2Exercise"/>
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

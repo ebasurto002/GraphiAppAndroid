@@ -1,5 +1,8 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
+import android.net.Uri;
+
 import org.json.JSONObject;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
@@ -26,5 +29,7 @@ public interface Business {
     public abstract JSONObject getClasses(String nickname);
     public abstract JSONObject getResults(String nickname, String tematica);
     public abstract String postLevel1(String correcta, String incorrecta, String nickname);
+    public abstract String postLevel2(String unstressedWord, int stressPos, String filename, String nickname);
     public abstract Boolean postResults(double [] puntuaciones, int pin, String nickname);
+    public abstract boolean uploadFile(Uri uri, Context c, String filename);
 }

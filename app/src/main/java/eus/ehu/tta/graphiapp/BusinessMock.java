@@ -1,5 +1,8 @@
 package eus.ehu.tta.graphiapp;
 
+import android.content.Context;
+import android.net.Uri;
+
 import org.json.JSONObject;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
@@ -138,7 +141,14 @@ public class BusinessMock implements Business {
     }
 
     @Override
+    public String postLevel2(String unstressedWord, int stressPos, String filename, String nickname) {
+        return null;
+    }
+
     public Boolean postResults(double[] puntuaciones, int pin, String nickname) {
         return null;
+    }
+    public boolean uploadFile(Uri uri, Context c, String filename) {
+        return false;
     }
 }
