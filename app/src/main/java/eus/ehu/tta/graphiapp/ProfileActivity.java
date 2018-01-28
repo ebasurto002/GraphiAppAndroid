@@ -98,8 +98,10 @@ public class ProfileActivity extends drawerStudentActivity {
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.height = GridLayout.LayoutParams.WRAP_CONTENT;
         params.width = GridLayout.LayoutParams.WRAP_CONTENT;
-        params.rightMargin = 5;
-        params.topMargin = 5;
+        params.rightMargin = 50;
+        params.topMargin = 25;
+        params.bottomMargin = 25;
+        params.leftMargin = 50;
         params.setGravity(Gravity.CENTER);
         params.columnSpec = GridLayout.spec(columnNum);
         params.rowSpec = GridLayout.spec(rowNum);
