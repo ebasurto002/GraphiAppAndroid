@@ -3,11 +3,11 @@
     package="eus.ehu.tta.graphiapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
-    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
-
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -19,11 +19,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/registerLabel">
-        </activity>
+            android:label="@string/registerLabel"></activity>
         <activity
             android:name=".userHomeActivity"
-            android:label="@string/userHomeLabel"></activity>
+            android:label="@string/userHomeLabel" />
         <activity
             android:name=".applicationHelpActivity"
             android:label="@string/applicationHelpLabel" />
@@ -81,13 +80,17 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".LauncherActivity" android:label="GraphiApp" android:noHistory="true">
+        <activity
+            android:name=".LauncherActivity"
+            android:label="GraphiApp"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LevelBaseActivity"></activity>
     </application>
 
 </manifest>

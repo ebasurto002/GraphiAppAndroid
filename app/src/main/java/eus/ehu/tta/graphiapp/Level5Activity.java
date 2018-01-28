@@ -13,19 +13,9 @@ import android.widget.Toast;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel5;
 
-public class Level5Activity extends drawerStudentActivity {
+public class Level5Activity extends LevelBaseActivity <Nivel5> {
 
-    private static final String INDEX = "index";
-    private static final String CORRECTAS = "correctas";
-    private static final String LEVELARRAY = "levelArray";
     private static final String ORDER = "order";
-    private int index;
-    private int correctas;
-    private Nivel5[] levelArray;
-    private String nickname;
-    private Integer pin;
-    StudentData studentData;
-    double [] puntuacionesArray;
     private int order;
 
     @Override
@@ -35,33 +25,20 @@ public class Level5Activity extends drawerStudentActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_level5,frameLayout,true);
 
-        studentData = new StudentData(this);
-        nickname = studentData.getNickname();
-        Intent intent = getIntent();
-        int pinExtra = intent.getIntExtra("pin",-1);
-        if (pinExtra == -1) {
-            pin = null;
-        }
-        else
+        if (pin != null)
         {
-            pin = pinExtra;
-            Button button = findViewById(R.id.level5BackButton);
+            Button button = findViewById(R.id.levelBackButton);
             button.setEnabled(false);
-            puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
+            puntuacionesArray = getIntent().getDoubleArrayExtra("puntuacionesArray");
         }
 
         if (savedInstanceState == null)
         {
-            index=0;
-            correctas=0;
             new getLevelTask(this).execute();
         }
 
         else
         {
-            index = savedInstanceState.getInt(INDEX);
-            correctas = savedInstanceState.getInt(CORRECTAS);;
-            levelArray = (Nivel5[]) savedInstanceState.getParcelableArray(LEVELARRAY);
             order = savedInstanceState.getInt(ORDER);
             setViews();
             Button confirmButton = findViewById(R.id.level5ConfirmButton);
@@ -71,9 +48,6 @@ public class Level5Activity extends drawerStudentActivity {
 
     public void onSaveInstanceState (Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(INDEX,index);
-        savedInstanceState.putInt(CORRECTAS,correctas);
-        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
         savedInstanceState.putInt(ORDER,order);
     }
 
@@ -132,11 +106,6 @@ public class Level5Activity extends drawerStudentActivity {
         return split;
     }
 
-    public void goBack(View view) {
-        Intent intent = new Intent(this,LevelsActivity.class);
-        startActivity(intent);
-    }
-
     public void checkWords(View view) {
         EditText editText1 = findViewById(R.id.level5EditText1);
         EditText editText2 = findViewById(R.id.level5EditText2);
@@ -157,21 +126,11 @@ public class Level5Activity extends drawerStudentActivity {
         }
     }
 
-    private void endLevel(int numNivel) {
-        float puntuacion = (float)(correctas*10)/(float)levelArray.length;
-        Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
-
-        float puntuacionGuardada = studentData.getResultado(numNivel);
-        if (pin == null) {
-            if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
-            {
-                studentData.setResultado(puntuacion, numNivel);
-            }
-            goBack(null);
-        }
-        else
+    protected void endLevel(int numNivel) {
+        super.endLevel(numNivel);
+        if (pin != null)
         {
-            puntuacionesArray[4] = puntuacion;
+            puntuacionesArray[4] = (float)(correctas*10)/(float)levelArray.length;
             Intent intent = new Intent(this,Level8Activity.class);
             intent.putExtra("pin",pin);
             intent.putExtra("puntuacionesArray",puntuacionesArray);

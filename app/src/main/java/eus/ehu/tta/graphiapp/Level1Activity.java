@@ -11,18 +11,7 @@ import android.widget.Toast;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel1;
 
-public class Level1Activity extends drawerStudentActivity {
-
-    private static final String INDEX = "index";
-    private static final String CORRECTAS = "correctas";
-    private static final String LEVELARRAY = "levelArray";
-    private int index;
-    private int correctas;
-    private Nivel1[] levelArray;
-    private String nickname;
-    private Integer pin;
-    StudentData studentData;
-    double [] puntuacionesArray;
+public class Level1Activity extends LevelBaseActivity <Nivel1> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +20,9 @@ public class Level1Activity extends drawerStudentActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_level1,frameLayout,true);
 
-        studentData = new StudentData(this);
-        nickname = studentData.getNickname();
-        Intent intent = getIntent();
-        int pinExtra = intent.getIntExtra("pin",-1);
-        if (pinExtra == -1) {
-            pin = null;
-        }
-        else
+        if (pin != null)
         {
-            pin = pinExtra;
-            Button button = findViewById(R.id.level1BackButton);
+            Button button = findViewById(R.id.levelBackButton);
             button.setEnabled(false);
             puntuacionesArray = new double[6];
         }
@@ -50,17 +31,11 @@ public class Level1Activity extends drawerStudentActivity {
         Button button2 = findViewById(R.id.level1word2);
 
         if (savedInstanceState == null) {
-
-            index = 0;
-            correctas = 0;
             new getLevelTask(this).execute();
         }
 
         else
         {
-            index = savedInstanceState.getInt(INDEX);
-            correctas = savedInstanceState.getInt(CORRECTAS);;
-            levelArray = (Nivel1 []) savedInstanceState.getParcelableArray(LEVELARRAY);
             button1.setEnabled(true);
             button2.setEnabled(true);
             setTextButtons();
@@ -70,23 +45,11 @@ public class Level1Activity extends drawerStudentActivity {
         button2.setOnClickListener(new buttonOnClickListener(2));
     }
 
-    public void onSaveInstanceState (Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(INDEX,index);
-        savedInstanceState.putInt(CORRECTAS,correctas);
-        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
-    }
-
     private void setTextButtons() {
         Button button1 = findViewById(R.id.level1word1);
         Button button2 = findViewById(R.id.level1word2);
         button1.setText(levelArray[index].getPalabra1());
         button2.setText(levelArray[index].getPalabra2());
-    }
-
-    public void goBack(View view) {
-        Intent intent = new Intent(this,LevelsActivity.class);
-        startActivity(intent);
     }
 
     private class buttonOnClickListener implements View.OnClickListener
@@ -116,21 +79,11 @@ public class Level1Activity extends drawerStudentActivity {
         }
     }
 
-    private void endLevel(int numNivel) {
-        float puntuacion = (float)(correctas*10)/(float)levelArray.length;
-        Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
-
-        float puntuacionGuardada = studentData.getResultado(numNivel);
-        if (pin == null) {
-            if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
-            {
-                studentData.setResultado(puntuacion, numNivel);
-            }
-            goBack(null);
-        }
-        else
+    protected void endLevel(int numNivel) {
+        super.endLevel(numNivel);
+        if (pin != null)
         {
-            puntuacionesArray[0] = puntuacion;
+            puntuacionesArray[0] = (float)(correctas*10)/(float)levelArray.length;
             Intent intent = new Intent(this,Level2Activity.class);
             intent.putExtra("pin",pin);
             intent.putExtra("puntuacionesArray",puntuacionesArray);

@@ -14,18 +14,7 @@ import com.bumptech.glide.Glide;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel3;
 
-public class Level3Activity extends drawerStudentActivity {
-
-    private static final String INDEX = "index";
-    private static final String CORRECTAS = "correctas";
-    private static final String LEVELARRAY = "levelArray";
-    private int index;
-    private int correctas;
-    private Nivel3[] levelArray;
-    private String nickname;
-    private Integer pin;
-    StudentData studentData;
-    double [] puntuacionesArray;
+public class Level3Activity extends LevelBaseActivity<Nivel3> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,33 +23,20 @@ public class Level3Activity extends drawerStudentActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_level3,frameLayout,true);
 
-        studentData = new StudentData(this);
-        nickname = studentData.getNickname();
-        Intent intent = getIntent();
-        int pinExtra = intent.getIntExtra("pin",-1);
-        if (pinExtra == -1) {
-            pin = null;
-        }
-        else
+        if (pin != null)
         {
-            pin = pinExtra;
-            Button button = findViewById(R.id.level3BackButton);
+            Button button = findViewById(R.id.levelBackButton);
             button.setEnabled(false);
-            puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
+            puntuacionesArray = getIntent().getDoubleArrayExtra("puntuacionesArray");
         }
 
         if (savedInstanceState == null)
         {
-            index=0;
-            correctas=0;
             new getLevelTask(this).execute();
         }
 
         else
         {
-            index = savedInstanceState.getInt(INDEX);
-            correctas = savedInstanceState.getInt(CORRECTAS);;
-            levelArray = (Nivel3[]) savedInstanceState.getParcelableArray(LEVELARRAY);
             setViews();
             setButtons();
         }
@@ -75,13 +51,6 @@ public class Level3Activity extends drawerStudentActivity {
         button2.setEnabled(true);
     }
 
-    public void onSaveInstanceState (Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(INDEX,index);
-        savedInstanceState.putInt(CORRECTAS,correctas);
-        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
-    }
-
     private void setViews() {
         ImageView imageView = findViewById(R.id.level3Image);
         Glide.with(this).load(levelArray[index].getUrlImagen()).into(imageView);
@@ -89,11 +58,6 @@ public class Level3Activity extends drawerStudentActivity {
         button1.setText(levelArray[index].getPalabra1());
         Button button2 = findViewById(R.id.level3Word2);
         button2.setText(levelArray[index].getPalabra2());
-    }
-
-    public void goBack(View view) {
-        Intent intent = new Intent(this,LevelsActivity.class);
-        startActivity(intent);
     }
 
     private class ButtonOnClickListener implements View.OnClickListener {
@@ -120,21 +84,11 @@ public class Level3Activity extends drawerStudentActivity {
         }
     }
 
-    private void endLevel(int numNivel) {
-        float puntuacion = (float)(correctas*10)/(float)levelArray.length;
-        Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
-
-        float puntuacionGuardada = studentData.getResultado(numNivel);
-        if (pin == null) {
-            if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
-            {
-                studentData.setResultado(puntuacion, numNivel);
-            }
-            goBack(null);
-        }
-        else
+    protected void endLevel(int numNivel) {
+        super.endLevel(numNivel);
+        if (pin != null)
         {
-            puntuacionesArray[2] = puntuacion;
+            puntuacionesArray[2] = (float)(correctas*10)/(float)levelArray.length;
             Intent intent = new Intent(this,Level4Activity.class);
             intent.putExtra("pin",pin);
             intent.putExtra("puntuacionesArray",puntuacionesArray);

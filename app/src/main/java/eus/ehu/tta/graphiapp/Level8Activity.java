@@ -27,19 +27,9 @@ import java.util.Arrays;
 
 import eus.ehu.tta.graphiapp.Levels.Nivel8;
 
-public class Level8Activity extends drawerStudentActivity {
+public class Level8Activity extends LevelBaseActivity<Nivel8> {
 
-    private static final String INDEX = "index";
-    private static final String CORRECTAS = "correctas";
-    private static final String LEVELARRAY = "levelArray";
     private static final String ISWORDVISIBLE = "isWordVisible";
-    private int index;
-    private int correctas;
-    private Nivel8[] levelArray;
-    private String nickname;
-    private Integer pin;
-    StudentData studentData;
-    double [] puntuacionesArray;
     boolean [] isWordVisible;
 
     @Override
@@ -49,33 +39,20 @@ public class Level8Activity extends drawerStudentActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(R.layout.activity_level8,frameLayout,true);
 
-        studentData = new StudentData(this);
-        nickname = studentData.getNickname();
-        Intent intent = getIntent();
-        int pinExtra = intent.getIntExtra("pin",-1);
-        if (pinExtra == -1) {
-            pin = null;
-        }
-        else
+        if (pin != null)
         {
-            pin = pinExtra;
-            Button button = findViewById(R.id.level8BackButton);
+            Button button = findViewById(R.id.levelBackButton);
             button.setEnabled(false);
-            puntuacionesArray = intent.getDoubleArrayExtra("puntuacionesArray");
+            puntuacionesArray = getIntent().getDoubleArrayExtra("puntuacionesArray");
         }
 
         if (savedInstanceState == null)
         {
-            index=0;
-            correctas=0;
             new getLevelTask(this).execute();
         }
 
         else
         {
-            index = savedInstanceState.getInt(INDEX);
-            correctas = savedInstanceState.getInt(CORRECTAS);;
-            levelArray = (Nivel8[]) savedInstanceState.getParcelableArray(LEVELARRAY);
             isWordVisible = savedInstanceState.getBooleanArray(ISWORDVISIBLE);
             setViews();
         }
@@ -83,9 +60,6 @@ public class Level8Activity extends drawerStudentActivity {
 
     public void onSaveInstanceState (Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(INDEX,index);
-        savedInstanceState.putInt(CORRECTAS,correctas);
-        savedInstanceState.putParcelableArray(LEVELARRAY,levelArray);
 
         GridLayout grid = findViewById(R.id.level8Grid);
         for (int i = 0; i < levelArray.length; i++)
@@ -129,11 +103,6 @@ public class Level8Activity extends drawerStudentActivity {
         cajaEsdrujulas.setOnDragListener(new myDragEventListener(3));
     }
 
-    public void goBack(View view) {
-        Intent intent = new Intent(this,LevelsActivity.class);
-        startActivity(intent);
-    }
-
     public void checkWords(int acentuacion, int tipoCaja) {
         if (acentuacion == tipoCaja)
         {
@@ -146,21 +115,11 @@ public class Level8Activity extends drawerStudentActivity {
         }
     }
 
-    private void endLevel(int numNivel) {
-        float puntuacion = (float)(correctas*10)/(float)levelArray.length;
-        Toast.makeText(this,"Tu puntuacion es " + puntuacion, Toast.LENGTH_SHORT).show();
-
-        float puntuacionGuardada = studentData.getResultado(numNivel);
-        if (pin == null) {
-            if (puntuacionGuardada < puntuacion) //TODO: Considerar desbloqueo de los niveles
-            {
-                studentData.setResultado(puntuacion, numNivel);
-            }
-            goBack(null);
-        }
-        else
+    protected void endLevel(int numNivel) {
+        super.endLevel(numNivel);
+        if (pin != null)
         {
-            puntuacionesArray[5] = puntuacion;
+            puntuacionesArray[5] = (float)(correctas*10)/(float)levelArray.length;
             new uploadResultsServerTask (this).execute();
         }
     }
