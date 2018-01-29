@@ -96,4 +96,5 @@
     <string name="no_audio_record_app">No existe aplicación para grabar audio</string>
     <string name="onFileUploadSuccess">El fichero se ha subido con éxito</string>
     <string name="onFileUploadFail">Error, no se ha podido subir el fichero</string>
+    <string name="returnToRegister">Volver al registro</string>
 </resources>

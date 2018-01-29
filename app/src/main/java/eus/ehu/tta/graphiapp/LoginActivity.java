@@ -71,4 +71,9 @@ public class LoginActivity extends coreActivity {
 
 
     }
+
+    public void goToRegister(View view) {
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+    }
 }
