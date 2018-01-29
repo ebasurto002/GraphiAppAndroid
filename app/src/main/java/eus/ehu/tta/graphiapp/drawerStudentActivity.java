@@ -35,6 +35,7 @@ public class drawerStudentActivity extends drawerBaseActivity {
                 StudentData studentData = new StudentData(getApplicationContext());
                 studentData.setNickname(null);
                 Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
             DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

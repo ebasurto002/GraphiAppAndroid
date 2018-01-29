@@ -142,6 +142,7 @@ public class Level8Activity extends LevelBaseActivity<Nivel8> {
             Toast.makeText(this,"No se han encontrado ejercicios para ese pin determinado",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Level8Activity.this,VirtualClassActivity.class);
             startActivity(intent);
+            this.finish();
         }
     }
 
@@ -299,6 +300,8 @@ public class Level8Activity extends LevelBaseActivity<Nivel8> {
             }
             Intent intent = new Intent(Level8Activity.this,VirtualClassActivity.class);
             startActivity(intent);
+            startActivity(intent);
+            Level8Activity.this.finish();
         }
     }
 }

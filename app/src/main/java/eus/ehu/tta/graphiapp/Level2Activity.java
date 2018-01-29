@@ -148,5 +148,6 @@ public class Level2Activity extends LevelBaseActivity <Nivel2>  {
         intent.putExtra("pin",pin);
         intent.putExtra("puntuacionesArray",puntuacionesArray);
         startActivity(intent);
+        this.finish();
     }
 }

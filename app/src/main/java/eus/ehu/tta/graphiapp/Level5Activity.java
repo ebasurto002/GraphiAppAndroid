@@ -140,6 +140,7 @@ public class Level5Activity extends LevelBaseActivity <Nivel5> {
         intent.putExtra("pin",pin);
         intent.putExtra("puntuacionesArray",puntuacionesArray);
         startActivity(intent);
+        this.finish();
     }
 
     private class getLevelTask extends ProgressTask<Nivel5[]>
