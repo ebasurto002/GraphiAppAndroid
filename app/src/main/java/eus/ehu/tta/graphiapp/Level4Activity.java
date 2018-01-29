@@ -102,11 +102,15 @@ public class Level4Activity extends LevelBaseActivity<Nivel4> {
         if (pin != null)
         {
             puntuacionesArray[3] = (float)(correctas*10)/(float)levelArray.length;
-            Intent intent = new Intent(this,Level5Activity.class);
-            intent.putExtra("pin",pin);
-            intent.putExtra("puntuacionesArray",puntuacionesArray);
-            startActivity(intent);
+            goToNextLevel();
         }
+    }
+
+    private void goToNextLevel() {
+        Intent intent = new Intent(this,Level5Activity.class);
+        intent.putExtra("pin",pin);
+        intent.putExtra("puntuacionesArray",puntuacionesArray);
+        startActivity(intent);
     }
 
     private class getLevelTask extends ProgressTask<Nivel4[]>
@@ -125,7 +129,14 @@ public class Level4Activity extends LevelBaseActivity<Nivel4> {
         protected void onFinish(Nivel4[] result) {
             levelArray = result;
             if (levelArray != null) {
-                setNewspaperHeader();
+                if (levelArray.length != 0) {
+                    setNewspaperHeader();
+                }
+                else
+                {
+                    puntuacionesArray[3] = -1;
+                    goToNextLevel();
+                }
             }
             else
             {

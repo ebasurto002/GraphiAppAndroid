@@ -124,6 +124,27 @@ public class Level8Activity extends LevelBaseActivity<Nivel8> {
         }
     }
 
+    private void onVirtualClassEnd() {
+        boolean isThereExercises = false;
+        for (int i = 0; i < puntuacionesArray.length && isThereExercises == false; i++)
+        {
+            if (puntuacionesArray[i] != -1)
+            {
+                isThereExercises = true;
+            }
+        }
+        if (isThereExercises)
+        {
+            new uploadResultsServerTask (this).execute();
+        }
+        else
+        {
+            Toast.makeText(this,"No se han encontrado ejercicios para ese pin determinado",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Level8Activity.this,VirtualClassActivity.class);
+            startActivity(intent);
+        }
+    }
+
     private class getLevelTask extends ProgressTask<Nivel8[]>
     {
 
@@ -140,9 +161,16 @@ public class Level8Activity extends LevelBaseActivity<Nivel8> {
         protected void onFinish(Nivel8[] result) {
             levelArray = result;
             if (levelArray != null) {
-                isWordVisible = new boolean [levelArray.length];
-                Arrays.fill(isWordVisible,true);
-                setViews();
+                if (levelArray.length != 0) {
+                    isWordVisible = new boolean[levelArray.length];
+                    Arrays.fill(isWordVisible, true);
+                    setViews();
+                }
+                else
+                {
+                    puntuacionesArray[5] = -1;
+                    onVirtualClassEnd();
+                }
             }
             else
             {

@@ -104,10 +104,7 @@ public class Level2Activity extends LevelBaseActivity <Nivel2>  {
         if (pin != null)
         {
             puntuacionesArray[1] = (float)(correctas*10)/(float)levelArray.length;
-            Intent intent = new Intent(this,Level3Activity.class);
-            intent.putExtra("pin",pin);
-            intent.putExtra("puntuacionesArray",puntuacionesArray);
-            startActivity(intent);
+            goToNextLevel();
         }
     }
 
@@ -127,14 +124,29 @@ public class Level2Activity extends LevelBaseActivity <Nivel2>  {
         protected void onFinish(Nivel2[] result) {
             levelArray = result;
             if (levelArray != null) {
-                setButtons();
-                Button button = findViewById(R.id.level2HearAudio);
-                button.setEnabled(true);
+                if (levelArray.length != 0) {
+                    setButtons();
+                    Button button = findViewById(R.id.level2HearAudio);
+                    button.setEnabled(true);
+                }
+                else
+                {
+                    puntuacionesArray[1] = -1;
+                    goToNextLevel();
+                }
             }
             else
             {
                 Toast.makeText(Level2Activity.this, "No se ha podido obtener los ejercicios del servidor",Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private void goToNextLevel()
+    {
+        Intent intent = new Intent(this,Level3Activity.class);
+        intent.putExtra("pin",pin);
+        intent.putExtra("puntuacionesArray",puntuacionesArray);
+        startActivity(intent);
     }
 }

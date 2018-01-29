@@ -89,11 +89,15 @@ public class Level3Activity extends LevelBaseActivity<Nivel3> {
         if (pin != null)
         {
             puntuacionesArray[2] = (float)(correctas*10)/(float)levelArray.length;
-            Intent intent = new Intent(this,Level4Activity.class);
-            intent.putExtra("pin",pin);
-            intent.putExtra("puntuacionesArray",puntuacionesArray);
-            startActivity(intent);
+            goToNextLevel();
         }
+    }
+
+    private void goToNextLevel() {
+        Intent intent = new Intent(this,Level4Activity.class);
+        intent.putExtra("pin",pin);
+        intent.putExtra("puntuacionesArray",puntuacionesArray);
+        startActivity(intent);
     }
 
 
@@ -113,8 +117,15 @@ public class Level3Activity extends LevelBaseActivity<Nivel3> {
         protected void onFinish(Nivel3[] result) {
             levelArray = result;
             if (levelArray != null) {
-                setViews();
-                setButtons();
+                if (levelArray.length != 0) {
+                    setViews();
+                    setButtons();
+                }
+                else
+                {
+                    puntuacionesArray[2] = -1;
+                    goToNextLevel();
+                }
             }
             else
             {

@@ -131,11 +131,15 @@ public class Level5Activity extends LevelBaseActivity <Nivel5> {
         if (pin != null)
         {
             puntuacionesArray[4] = (float)(correctas*10)/(float)levelArray.length;
-            Intent intent = new Intent(this,Level8Activity.class);
-            intent.putExtra("pin",pin);
-            intent.putExtra("puntuacionesArray",puntuacionesArray);
-            startActivity(intent);
+            goToNextLevel();
         }
+    }
+
+    private void goToNextLevel() {
+        Intent intent = new Intent(this,Level8Activity.class);
+        intent.putExtra("pin",pin);
+        intent.putExtra("puntuacionesArray",puntuacionesArray);
+        startActivity(intent);
     }
 
     private class getLevelTask extends ProgressTask<Nivel5[]>
@@ -154,10 +158,17 @@ public class Level5Activity extends LevelBaseActivity <Nivel5> {
         protected void onFinish(Nivel5[] result) {
             levelArray = result;
             if (levelArray != null) {
-                order = (int) Math.round(Math.random());
-                setViews();
-                Button confirmButton = findViewById(R.id.level5ConfirmButton);
-                confirmButton.setEnabled(true);
+                if (levelArray.length != 0) {
+                    order = (int) Math.round(Math.random());
+                    setViews();
+                    Button confirmButton = findViewById(R.id.level5ConfirmButton);
+                    confirmButton.setEnabled(true);
+                }
+                else
+                {
+                    puntuacionesArray[4] = -1;
+                    goToNextLevel();
+                }
             }
             else
             {
