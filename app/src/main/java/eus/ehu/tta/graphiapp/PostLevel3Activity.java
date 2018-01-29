@@ -24,7 +24,7 @@ public class PostLevel3Activity extends coreActivity {
         String correcta = ((EditText)findViewById(R.id.cWordL3)).getText().toString();
         String incorrecta = ((EditText)findViewById(R.id.iWordL3)).getText().toString();
         filename = correcta + ".jpg";
-        String remoteURL = "http://u017633.ehu.eus:28080/GraphiAppServer/img/"+filename;
+        String remoteURL = "http://u017633.ehu.eus:28080/static/GraphiAppServer/img/"+filename;
 
         boolean result = business.postLevel3(this,correcta,incorrecta,remoteURL);
         if(result == true){
